@@ -9,7 +9,7 @@ import android.widget.Button;
 // Full screen activity
 public class FullscreenActivity extends Activity {
 	
-	// HF: I don't even know if we need these definitions...? I've left this just in case.
+// HF: I don't even know if we need these definitions...? I've left this just in case.
 //	private static final boolean AUTO_HIDE = true;				// Hide system UI
 //	private static final int AUTO_HIDE_DELAY_MILLIS = 3000;		// Time in ms before the system UI is hidden
 //	private static final boolean TOGGLE_ON_CLICK = true;		// Toggle system UI on interaction
