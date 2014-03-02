@@ -1,6 +1,7 @@
 package com.turbo.whack;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,8 +22,8 @@ public class FullscreenActivity extends Activity {
 		start_button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				// TODO something with start button
-				
+				Intent intent = new Intent(FullscreenActivity.this, GamePlay.class);
+				FullscreenActivity.this.startActivity(intent);
 			}	
 		});
 		

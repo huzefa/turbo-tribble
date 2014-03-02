@@ -22,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -30,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -38,7 +40,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -53,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -61,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -69,7 +75,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -84,6 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -92,6 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -100,7 +110,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -115,6 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -123,6 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -131,7 +145,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -146,6 +162,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -154,6 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -162,7 +180,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -177,6 +197,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -185,6 +206,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -193,7 +215,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -208,6 +232,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -216,6 +241,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
@@ -224,7 +250,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="game_button_clicked"
             android:text="Button" />
+
     </LinearLayout>
 
 </LinearLayout>
