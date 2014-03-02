@@ -4,13 +4,15 @@
  */
 package com.turbo.whack;
 
+import java.util.Random;
+
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.view.Window;
 import android.view.WindowManager;
 
 public class ActivityHelper {
-	/*
+	/**
 	 * This function must be called before we start doing anything in our activities.
 	 */
 	public static void activity_init(Activity activity) {
@@ -25,5 +27,20 @@ public class ActivityHelper {
 		activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+	}
+	
+	/**
+	 * A random number that can be used as an index for our buttons.
+	 * @return
+	 */
+	public static int get_random_number() {
+		double num = 0;
+		Random r = new Random();
+		num = r.nextInt(75 - 10);
+		num = Math.round((num + 5)/ 10.0) * 10.0;
+		num = num +	(r.nextInt(75 - 10) % 3);
+		
+		//HF: Forcing typecast to int. Can be improved.
+		return (int) num;
 	}
 }

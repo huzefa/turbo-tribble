@@ -31,7 +31,7 @@ public class GamePlay extends Activity {
 	 * @param v View name
 	 */
 	public void game_button_clicked(View v) {
-		
+		Log.i("INFO", "PRESSED");
 	}
 	/**
 	 * Make the button pressable and visible.
