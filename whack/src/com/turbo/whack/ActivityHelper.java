@@ -35,12 +35,17 @@ public class ActivityHelper {
 	 */
 	public static int get_random_number() {
 		double num = 0;
+		int res;
+		
 		Random r = new Random();
 		num = r.nextInt(75 - 10);
 		num = Math.round((num + 5)/ 10.0) * 10.0;
-		num = num +	(r.nextInt(75 - 10) % 3);
-		
-		//HF: Forcing typecast to int. Can be improved.
-		return (int) num;
+		num = num +	(r.nextInt(75 - 10) % 4);
+		// HF: I don't like the idea of typecasting but it may be necessary.
+		res = (int) num;
+		if(res % 10 == 0) {
+			res = get_random_number();
+		}
+		return res;
 	}
 }
