@@ -17,6 +17,10 @@ public class ActivityHelper {
 	public static final String WH_LOG_INFO = "WH_INFO";
 	public static final String WH_LOG_WARN = "WH_WARN";
 	
+	public static long WH_TIMER_CHECK_RATE = 50;
+	public static long WH_TIMER_MULTIPLIER = 100;
+	public static double WH_HARDNESS_FACTOR = 1.5;
+	
 	/**
 	 * This function must be called before we start doing anything in our activities.
 	 */

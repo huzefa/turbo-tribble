@@ -1,5 +1,7 @@
 package com.turbo.whack;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -8,7 +10,13 @@ import android.widget.Button;
 
 public class GamePlay extends Activity {
 	private static final int WH_BUTTON_MAP = 74;
-	private boolean exit = true;
+	
+	private Timer check_timer = new Timer();
+	private Timer button_timer;
+	private boolean button_pressed = false;
+	private boolean exit = false;
+	private long level = 100;
+	private int score = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +32,45 @@ public class GamePlay extends Activity {
 			hide_button(button[i+2]);
 			hide_button(button[i+3]);
 		}
+				
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				if(button_pressed) {
+					button_pressed = false;
+					score++;
+					
+					if(score % 3 == 0 && score > 0) {
+						level /= ActivityHelper.WH_HARDNESS_FACTOR;
+					}
+					return;
+				}
+			}
+		};
+		check_timer.scheduleAtFixedRate(task, 0, ActivityHelper.WH_TIMER_CHECK_RATE);
 		
-		//game loop
-		while(true) {
-			int rand = ActivityHelper.get_random_number();
-			show_button(button[rand]);
-			
-			if(exit)
-				break;
-		}
+		start_game();
+	}
+	
+	private void start_game() {
+//		button_timer = new Timer();
+//		TimerTask task = new TimerTask() {
+//			@Override
+//			public void run() {
+//				
+//			}
+//		};
+	}
+	
+	/**
+	 * This method will display any random button
+	 * @param button
+	 * @return
+	 */
+	private int show_random_button(Button[] button) {
+		int rand = ActivityHelper.get_random_number();
+		show_button(button[rand]);
+		return 0;
 	}
 	
 	/**
@@ -40,8 +78,11 @@ public class GamePlay extends Activity {
 	 * @param v View name
 	 */
 	public void game_button_clicked(View v) {
-		Log.v(ActivityHelper.WH_LOG_INFO, "BUTTON PRESSED: " + v.getId());
+		button_pressed = true;
+		Button b = (Button) findViewById(v.getId());
+		hide_button(b);
 	}
+	
 	/**
 	 * Make the button pressable and visible.
 	 * @param button The button in question
@@ -70,6 +111,7 @@ public class GamePlay extends Activity {
 	@Override
 	public void onBackPressed() {
 		exit = true;
+		check_timer.cancel();
 		this.finish();
 	}
 	
