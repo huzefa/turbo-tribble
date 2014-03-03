@@ -1,5 +1,6 @@
 /*
  * This is a helper class. Add any functions that would be required across multiple activities here.
+ * It would be best to keep most functions static here.
  * 
  */
 package com.turbo.whack;
@@ -12,6 +13,10 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class ActivityHelper {
+	
+	public static final String WH_LOG_INFO = "WH_INFO";
+	public static final String WH_LOG_WARN = "WH_WARN";
+	
 	/**
 	 * This function must be called before we start doing anything in our activities.
 	 */
