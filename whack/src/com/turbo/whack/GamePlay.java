@@ -3,12 +3,12 @@ package com.turbo.whack;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
 public class GamePlay extends Activity {
-	private static final int BUTTON_MAP = 74;
+	private static final int WH_BUTTON_MAP = 74;
+	private boolean exit = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,15 @@ public class GamePlay extends Activity {
 			hide_button(button[i+2]);
 			hide_button(button[i+3]);
 		}
+		
+		//game loop
+		while(true) {
+			int rand = ActivityHelper.get_random_number();
+			show_button(button[rand]);
+			
+			if(exit)
+				break;
+		}
 	}
 	
 	/**
@@ -31,7 +40,7 @@ public class GamePlay extends Activity {
 	 * @param v View name
 	 */
 	public void game_button_clicked(View v) {
-		Log.i("INFO", "PRESSED");
+		Log.v(ActivityHelper.WH_LOG_INFO, "BUTTON PRESSED: " + v.getId());
 	}
 	/**
 	 * Make the button pressable and visible.
@@ -51,8 +60,17 @@ public class GamePlay extends Activity {
 	 */
 	private int hide_button(Button button) {
 		button.setEnabled(false);
-		button.setVisibility(View.VISIBLE);
+		button.setVisibility(View.INVISIBLE);
 		return 0;
+	}
+	
+	/**
+	 * Clean up before exiting
+	 */
+	@Override
+	public void onBackPressed() {
+		exit = true;
+		this.finish();
 	}
 	
 	/**
@@ -60,9 +78,7 @@ public class GamePlay extends Activity {
 	 * @return An array of type Button with all the ids referenced
 	 */
 	private Button[] get_button_handles() {
-		Button button_array[] = new Button[BUTTON_MAP];
-		
-		// init
+		Button button_array[] = new Button[WH_BUTTON_MAP];
 		for(int i = 0; i < 74; i++) {
 			button_array[i] = null;
 		}
