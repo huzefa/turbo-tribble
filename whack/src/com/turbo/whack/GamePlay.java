@@ -24,15 +24,16 @@ public class GamePlay extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_play);
 		
-		Button button[] = get_button_handles();
+		final Button button[] = get_button_handles();
 		
 		// disable and hide all buttons
-		for(int i = 10; i < 74; i+=10) {
+		for(int i = 10; i < WH_BUTTON_MAP; i+=10) {
 			hide_button(button[i+1]);
 			hide_button(button[i+2]);
 			hide_button(button[i+3]);
 		}
-				
+		
+		// Poll for any button presses
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
@@ -44,36 +45,32 @@ public class GamePlay extends Activity {
 					if(score % 3 == 0 && score > 0) {
 						level /= ActivityHelper.WH_HARDNESS_FACTOR;
 					}
+					
+					// Spawn a new random button
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							show_random_button(button);
+						}
+					});
+					
 					return;
 				}
 			}
 		};
 		check_timer.scheduleAtFixedRate(task, 0, ActivityHelper.WH_TIMER_CHECK_RATE);
 		
-		start_game(button);
-	}
-	
-	private void start_game(Button[] b) {
-		final Button[] button = b;
 		button_show_timer = new Timer();
-		
-		if(level * ActivityHelper.WH_TIMER_MULTIPLIER < ActivityHelper.WH_TIMER_CHECK_RATE) {
-			// The player managed to beat the game.
-		}
-		
 		TimerTask button_show_task = new TimerTask() {
 			@Override
 			public void run() {
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						show_random_button(button);
-					}
-				});
+				// do something
 			}
 		};
 		button_show_timer.schedule(button_show_task, level * ActivityHelper.WH_TIMER_MULTIPLIER);
 		
+		// Show the button the first time
+		show_random_button(button);
 	}
 	
 	/**
