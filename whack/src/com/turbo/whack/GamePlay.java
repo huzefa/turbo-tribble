@@ -104,6 +104,7 @@ public class GamePlay extends Activity {
 	public void game_button_clicked(View v) {
 		button_pressed = true;
 		Button b = (Button) findViewById(v.getId());
+		Log.i(ActivityHelper.WH_LOG_INFO, "SCORE: " + score);
 		hide_button(b);
 	}
 	
