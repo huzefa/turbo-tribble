@@ -12,7 +12,7 @@ public class GamePlay extends Activity {
 	private static final int WH_BUTTON_MAP = 74;
 	
 	private Timer check_timer = new Timer();
-	private Timer button_timer;
+	private Timer button_show_timer;
 	private boolean button_pressed = false;
 	private boolean exit = false;
 	private long level = 100;
@@ -38,8 +38,9 @@ public class GamePlay extends Activity {
 			public void run() {
 				if(button_pressed) {
 					button_pressed = false;
+					exit = true;
 					score++;
-					
+					// Cancel the timeout timer
 					if(score % 3 == 0 && score > 0) {
 						level /= ActivityHelper.WH_HARDNESS_FACTOR;
 					}
@@ -49,17 +50,30 @@ public class GamePlay extends Activity {
 		};
 		check_timer.scheduleAtFixedRate(task, 0, ActivityHelper.WH_TIMER_CHECK_RATE);
 		
-		start_game();
+		start_game(button);
 	}
 	
-	private void start_game() {
-//		button_timer = new Timer();
-//		TimerTask task = new TimerTask() {
-//			@Override
-//			public void run() {
-//				
-//			}
-//		};
+	private void start_game(Button[] b) {
+		final Button[] button = b;
+		button_show_timer = new Timer();
+		
+		if(level * ActivityHelper.WH_TIMER_MULTIPLIER < ActivityHelper.WH_TIMER_CHECK_RATE) {
+			// The player managed to beat the game.
+		}
+		
+		TimerTask button_show_task = new TimerTask() {
+			@Override
+			public void run() {
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						show_random_button(button);
+					}
+				});
+			}
+		};
+		button_show_timer.schedule(button_show_task, level * ActivityHelper.WH_TIMER_MULTIPLIER);
+		
 	}
 	
 	/**
