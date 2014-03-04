@@ -43,6 +43,9 @@ public class GamePlay extends Activity {
 				if(game_over) {
 					check_timer.cancel();
 					countdown_timer.cancel(); 
+					Log.i(ActivityHelper.WH_LOG_INFO, "Time Expired! Game over.");
+					Log.i(ActivityHelper.WH_LOG_INFO, "Level: " + level);
+					Log.i(ActivityHelper.WH_LOG_INFO, "Time given: " + (level * ActivityHelper.WH_TIMER_MULTIPLIER));
 					// Show score screen
 				}
 				if(button_pressed) {
