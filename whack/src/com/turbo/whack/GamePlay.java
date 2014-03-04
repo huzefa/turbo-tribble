@@ -2,10 +2,14 @@ package com.turbo.whack;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import android.os.Bundle;
+
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 public class GamePlay extends Activity {
@@ -103,9 +107,21 @@ public class GamePlay extends Activity {
 	 */
 	public void game_button_clicked(View v) {
 		button_pressed = true;
-		Button b = (Button) findViewById(v.getId());
+		final Button b = (Button) findViewById(v.getId());
 		Log.i(ActivityHelper.WH_LOG_INFO, "SCORE: " + score);
-		hide_button(b);
+		
+		Animation vanish = AnimationUtils.loadAnimation(this, R.anim.vanish);
+		vanish.setAnimationListener(new Animation.AnimationListener() {			
+			@Override
+			public void onAnimationStart(Animation animation) {}			
+			@Override
+			public void onAnimationRepeat(Animation animation) {}			
+			@Override
+			public void onAnimationEnd(Animation animation) {			
+				hide_button(b);
+			}
+		});
+		b.startAnimation(vanish);
 	}
 	
 	/**
@@ -124,7 +140,7 @@ public class GamePlay extends Activity {
 	 * @param button
 	 * @return An integer showing success
 	 */
-	private int hide_button(Button button) {
+	private int hide_button(final Button button) {
 		button.setEnabled(false);
 		button.setVisibility(View.INVISIBLE);
 		return 0;
