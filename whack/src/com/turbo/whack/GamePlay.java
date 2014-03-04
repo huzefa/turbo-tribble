@@ -12,9 +12,9 @@ public class GamePlay extends Activity {
 	private static final int WH_BUTTON_MAP = 74;
 	
 	private Timer check_timer = new Timer();
-	private Timer button_show_timer;
+	private Timer countdown_timer = new Timer();
 	private boolean button_pressed = false;
-	private boolean exit = false;
+	private boolean game_over = false;
 	private long level = 100;
 	private int score = 0;
 	
@@ -37,11 +37,27 @@ public class GamePlay extends Activity {
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
+				if(game_over) {
+					check_timer.cancel();
+					countdown_timer.cancel(); 
+					// Show score screen
+				}
 				if(button_pressed) {
 					button_pressed = false;
-					exit = true;
 					score++;
+					
 					// Cancel the timeout timer
+					countdown_timer.cancel();
+					TimerTask t = new TimerTask() {
+						@Override
+						public void run() {
+							game_over = true;
+						}
+					};
+					countdown_timer = new Timer();
+					countdown_timer.schedule(t, level * ActivityHelper.WH_TIMER_MULTIPLIER);
+					
+					// Make it harder
 					if(score % 3 == 0 && score > 0) {
 						level /= ActivityHelper.WH_HARDNESS_FACTOR;
 					}
@@ -53,21 +69,18 @@ public class GamePlay extends Activity {
 							show_random_button(button);
 						}
 					});
-					
-					return;
 				}
 			}
 		};
 		check_timer.scheduleAtFixedRate(task, 0, ActivityHelper.WH_TIMER_CHECK_RATE);
 		
-		button_show_timer = new Timer();
-		TimerTask button_show_task = new TimerTask() {
+		TimerTask t = new TimerTask() {
 			@Override
 			public void run() {
-				// do something
+				game_over = true;
 			}
 		};
-		button_show_timer.schedule(button_show_task, level * ActivityHelper.WH_TIMER_MULTIPLIER);
+		countdown_timer.schedule(t, level * ActivityHelper.WH_TIMER_MULTIPLIER);
 		
 		// Show the button the first time
 		show_random_button(button);
@@ -121,8 +134,9 @@ public class GamePlay extends Activity {
 	 */
 	@Override
 	public void onBackPressed() {
-		exit = true;
+		game_over = true;
 		check_timer.cancel();
+		countdown_timer.cancel();
 		this.finish();
 	}
 	
