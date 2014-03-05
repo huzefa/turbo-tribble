@@ -84,8 +84,11 @@ public class GamePlay extends Activity {
 				// update textview
 				runOnUiThread(new Runnable() {
 					@Override
-					public void run() {
+					public void run() { 
 						time_remaining = time_remaining - 50;
+						if(time_remaining < 0) {
+							time_remaining = 0;
+						}
 						time_view.setText(Long.toString(time_remaining));						
 					}
 				});
