@@ -51,13 +51,13 @@ public class GamePlay extends Activity {
 					Log.i(ActivityHelper.WH_LOG_INFO, "Time Expired! Game over.");
 					Log.i(ActivityHelper.WH_LOG_INFO, "Level: " + level);
 					Log.i(ActivityHelper.WH_LOG_INFO, "Time given: " + (level * ActivityHelper.WH_TIMER_MULTIPLIER));
-					// Show score screen
+					// TODO: Update the score screen here
 				}
 				if(button_pressed) {
 					button_pressed = false;
 					score++;
 					
-					// Cancel the timeout timer
+					// Restart the timeout timer
 					countdown_timer.cancel();
 					TimerTask t = new TimerTask() {
 						@Override
@@ -73,17 +73,9 @@ public class GamePlay extends Activity {
 					if(score % 3 == 0 && score > 0) {
 						level /= ActivityHelper.WH_HARDNESS_FACTOR;
 					}
-					
-					// Spawn a new random button
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							show_random_button(button);
-						}
-					});
 				}
 				
-				// update textview
+				// update ui
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() { 
@@ -94,6 +86,9 @@ public class GamePlay extends Activity {
 						time_view.setText(Long.toString(time_remaining));
 						if(game_over) {
 							button[button_in_focus].setEnabled(false);
+						}
+						if(button_pressed) {
+							show_random_button(button);
 						}
 					}
 				});
@@ -116,8 +111,8 @@ public class GamePlay extends Activity {
 	
 	/**
 	 * This method will display any random button
-	 * @param button
-	 * @return
+	 * @param button An array of type button
+	 * @return An integer denoting success
 	 */
 	private int show_random_button(Button[] button) {
 		button_in_focus = ActivityHelper.get_random_number();
