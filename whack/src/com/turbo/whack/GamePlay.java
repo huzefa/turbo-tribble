@@ -30,7 +30,7 @@ public class GamePlay extends Activity {
 		setContentView(R.layout.activity_game_play);
 		
 		final Button button[] = get_button_handles();
-		final TextView time_view = (TextView) findViewById(R.id.textView1);
+		final TextView time_view = (TextView) findViewById(R.id.time_remaining);
 		
 		// disable and hide all buttons
 		for(int i = 10; i < WH_BUTTON_MAP; i+=10) {
