@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class GamePlay extends Activity {
 	private static final int WH_BUTTON_MAP = 74;
@@ -20,6 +21,7 @@ public class GamePlay extends Activity {
 	private boolean game_over = false;
 	private long level = 100;
 	private int score = 0;
+	private long time_remaining = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class GamePlay extends Activity {
 		setContentView(R.layout.activity_game_play);
 		
 		final Button button[] = get_button_handles();
+		final TextView time_view = (TextView) findViewById(R.id.textView1);
 		
 		// disable and hide all buttons
 		for(int i = 10; i < WH_BUTTON_MAP; i+=10) {
@@ -62,6 +65,7 @@ public class GamePlay extends Activity {
 					};
 					countdown_timer = new Timer();
 					countdown_timer.schedule(t, level * ActivityHelper.WH_TIMER_MULTIPLIER);
+					time_remaining = level * ActivityHelper.WH_TIMER_MULTIPLIER;
 					
 					// Make it harder
 					if(score % 3 == 0 && score > 0) {
@@ -76,6 +80,15 @@ public class GamePlay extends Activity {
 						}
 					});
 				}
+				
+				// update textview
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						time_remaining = time_remaining - 50;
+						time_view.setText(Long.toString(time_remaining));						
+					}
+				});
 			}
 		};
 		check_timer.scheduleAtFixedRate(task, 0, ActivityHelper.WH_TIMER_CHECK_RATE);
@@ -89,6 +102,7 @@ public class GamePlay extends Activity {
 		countdown_timer.schedule(t, level * ActivityHelper.WH_TIMER_MULTIPLIER);
 		
 		// Show the button the first time
+		time_remaining = level * ActivityHelper.WH_TIMER_MULTIPLIER;
 		show_random_button(button);
 	}
 	
