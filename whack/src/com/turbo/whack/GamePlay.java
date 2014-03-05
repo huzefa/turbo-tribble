@@ -22,6 +22,7 @@ public class GamePlay extends Activity {
 	private long level = 100;
 	private int score = 0;
 	private long time_remaining = 0;
+	private int button_in_focus = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class GamePlay extends Activity {
 				if(game_over) {
 					check_timer.cancel();
 					countdown_timer.cancel(); 
+					
 					Log.i(ActivityHelper.WH_LOG_INFO, "Time Expired! Game over.");
 					Log.i(ActivityHelper.WH_LOG_INFO, "Level: " + level);
 					Log.i(ActivityHelper.WH_LOG_INFO, "Time given: " + (level * ActivityHelper.WH_TIMER_MULTIPLIER));
@@ -89,7 +91,10 @@ public class GamePlay extends Activity {
 						if(time_remaining < 0) {
 							time_remaining = 0;
 						}
-						time_view.setText(Long.toString(time_remaining));						
+						time_view.setText(Long.toString(time_remaining));
+						if(game_over) {
+							button[button_in_focus].setEnabled(false);
+						}
 					}
 				});
 			}
@@ -115,8 +120,8 @@ public class GamePlay extends Activity {
 	 * @return
 	 */
 	private int show_random_button(Button[] button) {
-		int rand = ActivityHelper.get_random_number();
-		show_button(button[rand]);
+		button_in_focus = ActivityHelper.get_random_number();
+		show_button(button[button_in_focus]);
 		return 0;
 	}
 	
