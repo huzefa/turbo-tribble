@@ -54,7 +54,6 @@ public class GamePlay extends Activity {
 					// TODO: Update the score screen here
 				}
 				if(button_pressed) {
-					button_pressed = false;
 					score++;
 					
 					// Restart the timeout timer
@@ -89,6 +88,7 @@ public class GamePlay extends Activity {
 						}
 						if(button_pressed) {
 							show_random_button(button);
+							button_pressed = false;
 						}
 					}
 				});
