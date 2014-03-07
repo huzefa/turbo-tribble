@@ -127,20 +127,21 @@ public class GamePlay extends Activity {
 	public void game_button_clicked(View v) {
 		button_pressed = true;
 		final Button b = (Button) findViewById(v.getId());
-		Log.i(ActivityHelper.WH_LOG_INFO, "SCORE: " + score);
-		
-		Animation vanish = AnimationUtils.loadAnimation(this, R.anim.vanish);
-		vanish.setAnimationListener(new Animation.AnimationListener() {			
-			@Override
-			public void onAnimationStart(Animation animation) {}			
-			@Override
-			public void onAnimationRepeat(Animation animation) {}			
-			@Override
-			public void onAnimationEnd(Animation animation) {			
-				hide_button(b);
-			}
-		});
-		b.startAnimation(vanish);
+//		Log.i(ActivityHelper.WH_LOG_INFO, "SCORE: " + score);
+//		
+//		Animation vanish = AnimationUtils.loadAnimation(this, R.anim.vanish);
+//		vanish.setAnimationListener(new Animation.AnimationListener() {			
+//			@Override
+//			public void onAnimationStart(Animation animation) {}			
+//			@Override
+//			public void onAnimationRepeat(Animation animation) {}			
+//			@Override
+//			public void onAnimationEnd(Animation animation) {			
+//				hide_button(b);
+//			}
+//		});
+//		b.startAnimation(vanish);
+		hide_button(b);
 	}
 	
 	/**
