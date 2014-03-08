@@ -19,7 +19,7 @@ public class ActivityHelper {
 	
 	public static long WH_TIMER_CHECK_RATE = 50;
 	public static long WH_TIMER_MULTIPLIER = 100;
-	public static double WH_HARDNESS_FACTOR = 1.5;
+	public static double WH_LEVEL_DECAY_FACTOR = -0.1;
 	
 	/**
 	 * This function must be called before we start doing anything in our activities.
@@ -56,5 +56,11 @@ public class ActivityHelper {
 			res = get_random_number();
 		}
 		return res;
+	}
+	
+	public static int get_new_level(long current_level) {
+		double result = 0;
+		result = Math.ceil(current_level * Math.exp(WH_LEVEL_DECAY_FACTOR));
+		return (int) result;
 	}
 }

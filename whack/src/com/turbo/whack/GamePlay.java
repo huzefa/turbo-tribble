@@ -68,9 +68,9 @@ public class GamePlay extends Activity {
 					countdown_timer.schedule(t, level * ActivityHelper.WH_TIMER_MULTIPLIER);
 					time_remaining = level * ActivityHelper.WH_TIMER_MULTIPLIER;
 					
-					// Make it harder
-					if(score % 3 == 0 && score > 0) {
-						level /= ActivityHelper.WH_HARDNESS_FACTOR;
+					// Make it harder every two points
+					if(score % 2 == 0 && score > 0) {
+						level = ActivityHelper.get_new_level(level);
 					}
 				}
 				
