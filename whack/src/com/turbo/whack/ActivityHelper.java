@@ -8,6 +8,7 @@ package com.turbo.whack;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,6 +21,10 @@ public class ActivityHelper {
 	public static long WH_TIMER_CHECK_RATE = 50;
 	public static long WH_TIMER_MULTIPLIER = 100;
 	public static double WH_LEVEL_DECAY_FACTOR = -0.1;
+	public static String WH_APP_NAME;
+	
+	private static Context context;
+	private static int WH_MAX_HIGHSCORES = 10;
 	
 	/**
 	 * This function must be called before we start doing anything in our activities.
@@ -32,10 +37,12 @@ public class ActivityHelper {
 		activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 		
 		// Go full screen
-		// HF: We should consider hiding the nav bar as well
 		activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
+		WH_APP_NAME = activity.getApplicationContext().getPackageName();
+		context = activity.getApplicationContext();
 	}
 	
 	/**
@@ -50,8 +57,9 @@ public class ActivityHelper {
 		num = r.nextInt(75 - 10);
 		num = Math.round((num + 5)/ 10.0) * 10.0;
 		num = num +	(r.nextInt(75 - 10) % 4);
-		// HF: I don't like the idea of typecasting but it may be necessary.
 		res = (int) num;
+		
+		// HF: We should be able to filter out this case without doing this.
 		if(res % 10 == 0) {
 			res = get_random_number();
 		}
@@ -62,5 +70,23 @@ public class ActivityHelper {
 		double result = 0;
 		result = Math.ceil(current_level * Math.exp(WH_LEVEL_DECAY_FACTOR));
 		return (int) result;
+	}
+	
+	public static int record_score(String name, int score) {
+		DataStore storage = new DataStore(context, name);
+		String record = "record";
+		int err;
+		
+		for(int i = 0; i <= WH_MAX_HIGHSCORES; i++) {
+			String iString = Integer.toString(i);
+			err = storage.retrieve_int_value(record + iString);
+			if(err == -1) {
+				storage.store_string_value(name, iString);
+				storage.store_int_value(iString, score);
+				break;
+			}
+		}
+		
+		return 0;
 	}
 }
