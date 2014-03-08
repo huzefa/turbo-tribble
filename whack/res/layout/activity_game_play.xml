@@ -254,11 +254,26 @@
             android:text="Button" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/time_remaining"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/LinearLayout_display"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/time_remaining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/score_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+
+    </LinearLayout>
 
 </LinearLayout>

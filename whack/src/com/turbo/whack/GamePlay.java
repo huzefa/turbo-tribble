@@ -32,6 +32,7 @@ public class GamePlay extends Activity {
 		
 		final Button button[] = get_button_handles();
 		final TextView time_view = (TextView) findViewById(R.id.time_remaining);
+		final TextView score_view = (TextView) findViewById(R.id.score_textview);
 		
 		// disable and hide all buttons
 		for(int i = 10; i < WH_BUTTON_MAP; i+=10) {
@@ -74,7 +75,7 @@ public class GamePlay extends Activity {
 					}
 				}
 				
-				// update ui
+				// update ui and related activities
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() { 
@@ -87,6 +88,7 @@ public class GamePlay extends Activity {
 							button[button_in_focus].setEnabled(false);
 						}
 						if(button_pressed) {
+							score_view.setText(Integer.toString(score));
 							show_random_button(button);
 							button_pressed = false;
 						}
