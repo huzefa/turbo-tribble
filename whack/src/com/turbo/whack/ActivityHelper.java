@@ -74,18 +74,6 @@ public class ActivityHelper {
 	
 	public static int record_score(String name, int score) {
 		DataStore storage = new DataStore(context, name);
-		String record = "record";
-		int err;
-		
-		for(int i = 0; i <= WH_MAX_HIGHSCORES; i++) {
-			String iString = Integer.toString(i);
-			err = storage.retrieve_int_value(record + iString);
-			if(err == -1) {
-				storage.store_string_value(name, iString);
-				storage.store_int_value(iString, score);
-				break;
-			}
-		}
 		
 		return 0;
 	}
