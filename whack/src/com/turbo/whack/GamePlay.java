@@ -88,10 +88,10 @@ public class GamePlay extends Activity {
 							button[button_in_focus].setEnabled(false);
 						}
 						if(button_pressed) {
-							score_view.setText(Integer.toString(score));
 							show_random_button(button);
 							button_pressed = false;
 						}
+						score_view.setText(Integer.toString(score));
 					}
 				});
 			}
