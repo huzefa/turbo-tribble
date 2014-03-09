@@ -9,6 +9,7 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.pm.ActivityInfo;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,9 +23,17 @@ public class ActivityHelper {
 	public static long WH_TIMER_MULTIPLIER = 100;
 	public static double WH_LEVEL_DECAY_FACTOR = -0.1;
 	public static String WH_APP_NAME;
-	
-	private static Context context;
+	public static ContextWrapper context;
 	private static int WH_MAX_HIGHSCORES = 10;
+	
+	/**
+	 * This function must only be called on app init.
+	 * @param activity
+	 */
+	public static void app_init(Activity activity) {
+		WH_APP_NAME = activity.getApplicationContext().getPackageName();
+		context = new ContextWrapper(activity.getApplicationContext());
+	}
 	
 	/**
 	 * This function must be called before we start doing anything in our activities.
@@ -40,9 +49,6 @@ public class ActivityHelper {
 		activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
-		WH_APP_NAME = activity.getApplicationContext().getPackageName();
-		context = activity.getApplicationContext();
 	}
 	
 	/**
