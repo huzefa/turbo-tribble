@@ -17,6 +17,7 @@ public class GamePlay extends Activity {
 	
 	private Timer check_timer = new Timer();
 	private Timer countdown_timer = new Timer();
+	
 	private boolean button_pressed = false;
 	private boolean game_over = false;
 	private long level = 100;
@@ -56,9 +57,7 @@ public class GamePlay extends Activity {
 					Log.i(ActivityHelper.WH_LOG_INFO, "Time given: " + (level * ActivityHelper.WH_TIMER_MULTIPLIER));
 					// TODO: Update the score screen here
 				}
-				if(button_pressed) {
-					score++;
-					
+				if(button_pressed) {					
 					// Restart the timeout timer
 					countdown_timer.cancel();
 					TimerTask t = new TimerTask() {
@@ -93,7 +92,7 @@ public class GamePlay extends Activity {
 							show_random_button(button);
 							button_pressed = false;
 						}
-						score_view.setText(Integer.toString(score));
+						score_view.setText(Integer.toString(score));						
 					}
 				});
 			}
@@ -129,7 +128,7 @@ public class GamePlay extends Activity {
 	 * @param v View name
 	 */
 	public void game_button_clicked(View v) {
-		
+		score++;
 		final Button b = (Button) findViewById(v.getId());
 		
 		vanish.setAnimationListener(new Animation.AnimationListener() {			
