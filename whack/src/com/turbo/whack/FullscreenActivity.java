@@ -11,6 +11,7 @@ import android.widget.Button;
 public class FullscreenActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		ActivityHelper.app_init(this);
 		ActivityHelper.activity_init(this);
 		
 		super.onCreate(savedInstanceState);
