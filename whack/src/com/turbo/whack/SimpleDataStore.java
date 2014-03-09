@@ -18,9 +18,9 @@ public class SimpleDataStore {
 	 * @param context The application context. Preferably this shouldn't be the activity.
 	 * @param name The handle for the storage file.
 	 */
-	public SimpleDataStore(Context context, String name) {
+	public SimpleDataStore(String name) {
 		app_name = name;
-		pref = context.getSharedPreferences(app_name, Context.MODE_PRIVATE);
+		pref = ActivityHelper.context.getSharedPreferences(app_name, Context.MODE_PRIVATE);
 		editor = pref.edit();
 	}
 	
