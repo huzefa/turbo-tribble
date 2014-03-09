@@ -23,6 +23,7 @@ public class GamePlay extends Activity {
 	private int score = 0;
 	private long time_remaining = 0;
 	private int button_in_focus = 0;
+	private Animation vanish;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class GamePlay extends Activity {
 		final Button button[] = get_button_handles();
 		final TextView time_view = (TextView) findViewById(R.id.time_remaining);
 		final TextView score_view = (TextView) findViewById(R.id.score_textview);
+		vanish = AnimationUtils.loadAnimation(this, R.anim.vanish);
 		
 		// disable and hide all buttons
 		for(int i = 10; i < WH_BUTTON_MAP; i+=10) {
@@ -127,18 +129,18 @@ public class GamePlay extends Activity {
 	 * @param v View name
 	 */
 	public void game_button_clicked(View v) {
-		button_pressed = true;
+		
 		final Button b = (Button) findViewById(v.getId());
 		
-		Animation vanish = AnimationUtils.loadAnimation(this, R.anim.vanish);
 		vanish.setAnimationListener(new Animation.AnimationListener() {			
 			@Override
 			public void onAnimationStart(Animation animation) {}			
 			@Override
 			public void onAnimationRepeat(Animation animation) {}			
 			@Override
-			public void onAnimationEnd(Animation animation) {			
-				hide_button(b);
+			public void onAnimationEnd(Animation animation) {	
+				button_pressed = true;
+				hide_button(b);				
 			}
 		});
 		b.startAnimation(vanish);
@@ -186,6 +188,7 @@ public class GamePlay extends Activity {
 		Button button_array[] = new Button[WH_BUTTON_MAP];
 		for(int i = 0; i < 74; i++) {
 			button_array[i] = null;
+			
 		}
 		
 		button_array[11] = (Button) findViewById(R.id.Button11);
