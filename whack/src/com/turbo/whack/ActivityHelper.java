@@ -66,15 +66,14 @@ public class ActivityHelper {
 		return res;
 	}
 	
+	/**
+	 * This returns a new internal level to multiply against.
+	 * @param current_level The current internal level you're at
+	 * @return
+	 */
 	public static int get_new_level(long current_level) {
 		double result = 0;
 		result = Math.ceil(current_level * Math.exp(WH_LEVEL_DECAY_FACTOR));
 		return (int) result;
-	}
-	
-	public static int record_score(String name, int score) {
-		DataStore storage = new DataStore(context, name);
-		
-		return 0;
 	}
 }
