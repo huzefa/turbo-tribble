@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 
-public class DataStore {
+public class SimpleDataStore {
 	private String app_name = null;
 	private SharedPreferences pref;
 	private SharedPreferences.Editor editor;
@@ -18,7 +18,7 @@ public class DataStore {
 	 * @param context The application context. Preferably this shouldn't be the activity.
 	 * @param name The handle for the storage file.
 	 */
-	public DataStore(Context context, String name) {
+	public SimpleDataStore(Context context, String name) {
 		app_name = name;
 		pref = context.getSharedPreferences(app_name, Context.MODE_PRIVATE);
 		editor = pref.edit();
