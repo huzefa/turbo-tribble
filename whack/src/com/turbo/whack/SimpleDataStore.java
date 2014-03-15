@@ -7,6 +7,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.util.Log;
 
 public class SimpleDataStore {
 	private String app_name = null;
@@ -15,7 +16,6 @@ public class SimpleDataStore {
 	
 	/**
 	 * Constructor to retrieve a DataStore object.
-	 * @param context The application context. Preferably this shouldn't be the activity.
 	 * @param name The handle for the storage file.
 	 */
 	public SimpleDataStore(String name) {
@@ -27,7 +27,7 @@ public class SimpleDataStore {
 	/**
 	 * Add a new key or overwrite an existing int value
 	 * @param key type string
-	 * @param value type string
+	 * @param value type string.
 	 * @return False on failure, true otherwise.
 	 */
 	public boolean store_int_value(String key, int value) {
@@ -36,7 +36,7 @@ public class SimpleDataStore {
 	}
 	
 	/**
-	 * Add two values mapped to the same key. This is experimental.
+	 * Add two values mapped to the same key. This is experimental. Do not document.
 	 * @param key
 	 * @param value1
 	 * @param value2
@@ -44,6 +44,10 @@ public class SimpleDataStore {
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public boolean store_multi_string(String key, String value1, String value2) {
+		if(value1 == null || value2 == null) {
+			Log.i(ActivityHelper.WH_LOG_WARN, "Cannot store null value.");
+			return false;
+		}
 		Set<String> set = new HashSet<String>(); ///< Set<type> is an interface
 		set.add(value1);
 		set.add(value2);
@@ -54,10 +58,14 @@ public class SimpleDataStore {
 	/**
 	 * Add a new key or overwrite existing string value
 	 * @param key type string
-	 * @param value type string
+	 * @param value type string. Cannot be null.
 	 * @return False on failure, true otherwise.
 	 */
 	public boolean store_string_value(String key, String value) {
+		if(value == null) {
+			Log.i(ActivityHelper.WH_LOG_WARN, "Cannot store null value.");
+			return false;
+		}
 		editor.putString(key, value);
 		return editor.commit();
 	}
