@@ -1,6 +1,6 @@
 /*
  * This is a helper class. Add any functions that would be required across multiple activities here.
- * It would be best to keep most functions static here.
+ * All functions must be static in this class.
  * 
  */
 package com.turbo.whack;
@@ -18,6 +18,9 @@ public class ActivityHelper {
 	
 	public static final String WH_LOG_INFO = "WH_INFO";
 	public static final String WH_LOG_WARN = "WH_WARN";
+	public static final String WH_LOG_ERRO = "WH_ERRO";
+	
+	public static final String WH_DATA_NAME = "wh_data";
 	
 	public static long WH_TIMER_CHECK_RATE = 50;
 	public static long WH_TIMER_MULTIPLIER = 100;
