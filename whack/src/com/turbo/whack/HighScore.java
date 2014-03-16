@@ -66,6 +66,38 @@ public class HighScore {
 	// hs_deserialize();
 	
 	/**
+	 * A API that returns a sorted array of size 10 with the highscores. Make sure you cast the
+	 * object stored to HashMap<String, String> before use.
+	 * @return An array of type Map<String, String>[]. Returns null on failure.
+	 */
+	@SuppressWarnings("unchecked")
+	public Map<String, String>[] hs_get_all() {
+		Map<String, String>[] array = (Map<String, String>[]) new Map[10];
+		for(int i = 0; i < ActivityHelper.WH_MAX_HIGHSCORES; i++) {
+			try {
+				array[i] = (HashMap<String, String>) jObj.get("record" + (i+1));
+			} catch(JSONException j) {
+				return null;
+			}
+		}
+		return array;	
+	}
+	
+	/**
+	 * A function that must be called to save the highscores to memory to be loaded next time.
+	 * Make sure that you call this function before losing the object or there is no guarantee that
+	 * the scores will be recorded.
+	 */
+	public boolean hs_close() {
+		String s = jObj.toString();
+		if(s == null) {
+			Log.i(ActivityHelper.WH_LOG_ERRO, "String conversion failed.");
+			return false;
+		}
+		return sd.store_string_value(ActivityHelper.WH_DATA_NAME, s);
+	}
+	
+	/**
 	 * A function that gets the record holding the lowest score when compared to the current score.
 	 * @param score The current score
 	 * @return A string that is the record name. Null if not a highscore.
@@ -152,37 +184,5 @@ public class HighScore {
 			return -1;
 		}
 		return res;
-	}
-	
-	/**
-	 * A API that returns a sorted array of size 10 with the highscores. Make sure you cast the
-	 * object stored to HashMap<String, String> before use.
-	 * @return An array of type Map<String, String>[]. Returns null on failure.
-	 */
-	@SuppressWarnings("unchecked")
-	public Map<String, String>[] hs_get_all() {
-		Map<String, String>[] array = (Map<String, String>[]) new Map[10];
-		for(int i = 0; i < ActivityHelper.WH_MAX_HIGHSCORES; i++) {
-			try {
-				array[i] = (HashMap<String, String>) jObj.get("record" + (i+1));
-			} catch(JSONException j) {
-				return null;
-			}
-		}
-		return array;	
-	}
-	
-	/**
-	 * A function that must be called to save the highscores to memory to be loaded next time.
-	 * Make sure that you call this function before losing the object or there is no guarantee that
-	 * the scores will be recorded.
-	 */
-	public boolean hs_close() {
-		String s = jObj.toString();
-		if(s == null) {
-			Log.i(ActivityHelper.WH_LOG_ERRO, "String conversion failed.");
-			return false;
-		}
-		return sd.store_string_value(ActivityHelper.WH_DATA_NAME, s);
 	}
 }
