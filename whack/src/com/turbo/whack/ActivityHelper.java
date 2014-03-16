@@ -8,7 +8,6 @@ package com.turbo.whack;
 import java.util.Random;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.pm.ActivityInfo;
 import android.view.Window;
@@ -27,7 +26,7 @@ public class ActivityHelper {
 	public static double WH_LEVEL_DECAY_FACTOR = -0.1;
 	public static String WH_APP_NAME;
 	public static ContextWrapper context;
-	private static int WH_MAX_HIGHSCORES = 10;
+	public static int WH_MAX_HIGHSCORES = 10;
 	
 	/**
 	 * This function must only be called on app init.

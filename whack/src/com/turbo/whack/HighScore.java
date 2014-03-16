@@ -27,7 +27,7 @@ public class HighScore {
 			Log.i(ActivityHelper.WH_LOG_WARN, "Failed to retrive data. Creating new record.");
 			sd.store_string_value(ActivityHelper.WH_DATA_NAME, "empty");
 			jObj = new JSONObject();
-			for(int i = 1; i <= 10; i++) {
+			for(int i = 1; i <= ActivityHelper.WH_MAX_HIGHSCORES; i++) {
 				jObj.put("record" + i, null);
 			}
 		}
@@ -78,7 +78,7 @@ public class HighScore {
 		final String record = null;
 		
 		// Check if empty or exists
-		for(int i = 1; i <= 10; i++) {
+		for(int i = 1; i <= ActivityHelper.WH_MAX_HIGHSCORES; i++) {
 			int a = hs_get_score("record" + i);
 			if(score == a) {
 				is_empty = false;
@@ -97,7 +97,7 @@ public class HighScore {
 		}
 		
 		// Figure out where to put it and adjust.
-		for(int i = 1; i <= 10; i++) {
+		for(int i = 1; i <= ActivityHelper.WH_MAX_HIGHSCORES; i++) {
 			String rec = "record" + i;
 			int s = hs_get_score(rec);
 			if(s < 0) {
@@ -123,7 +123,7 @@ public class HighScore {
 		Map<String, String> tmp;
 		String r;
 		try {
-			for(int i = 10; i >= rank; i--) {
+			for(int i = ActivityHelper.WH_MAX_HIGHSCORES; i >= rank; i--) {
 				r = "record" + (i - 1);
 				tmp = (HashMap<String, String>) jObj.get(r);
 				jObj.put("record" + i, tmp);
@@ -155,11 +155,21 @@ public class HighScore {
 	}
 	
 	/**
-	 * A API that returns a sorted array of size 10 with the highscores.
-	 * @return An array of type Map<String, String>[] where the strings are name and score respectively
+	 * A API that returns a sorted array of size 10 with the highscores. Make sure you cast the
+	 * object stored to HashMap<String, String> before use.
+	 * @return An array of type Map<String, String>[]. Returns null on failure.
 	 */
+	@SuppressWarnings("unchecked")
 	public Map<String, String>[] hs_get_all() {
-		return null;	
+		Map<String, String>[] array = (Map<String, String>[]) new Map[10];
+		for(int i = 0; i < ActivityHelper.WH_MAX_HIGHSCORES; i++) {
+			try {
+				array[i] = (HashMap<String, String>) jObj.get("record" + (i+1));
+			} catch(JSONException j) {
+				return null;
+			}
+		}
+		return array;	
 	}
 	
 	/**
