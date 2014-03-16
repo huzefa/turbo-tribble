@@ -64,9 +64,13 @@ public class HighScore {
 		
 		// Check if empty or exists
 		for(int i = 1; i <= 10; i++) {
-			if(score == hs_get_score("record" + i)) {
+			int a = hs_get_score("record" + i);
+			if(score == a) {
 				is_empty = false;
 				score_exists = true;
+			}
+			if(a != -1) {
+				is_empty = false;
 			}
 		}
 		if(score_exists) {
@@ -76,6 +80,8 @@ public class HighScore {
 		if(is_empty) {
 			return "record1";
 		}
+		
+		
 		
 		// This cannot be null.
 		return null;
@@ -94,7 +100,10 @@ public class HighScore {
 		}
 		return res;
 	}
-	// hs_get_all();
+	
+	public Map<String, String>[] hs_get_all() {
+		return null;	
+	}
 	
 	public boolean close() {
 		String s = jObj.toString();
