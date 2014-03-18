@@ -19,6 +19,15 @@
         android:layout_below="@+id/start_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
-        android:text="Instructions" />
+        android:background="@drawable/mole_button" />
+
+    <Button
+        android:id="@+id/high_score_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/instructions_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="High Score" />
 
 </RelativeLayout>
