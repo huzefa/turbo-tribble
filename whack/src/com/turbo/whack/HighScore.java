@@ -17,19 +17,24 @@ public class HighScore {
 	 * Highscore object constructor.
 	 * @throws JSONException Non recoverable.
 	 */
-	public HighScore() throws JSONException {
+	public HighScore() {
 		sd = new SimpleDataStore(ActivityHelper.WH_APP_NAME);
-		String data = sd.retrieve_string_value(ActivityHelper.WH_DATA_NAME);
-		if(data != null) {
-			jObj = new JSONObject(data);
-		}
-		else {
-			Log.i(ActivityHelper.WH_LOG_WARN, "Failed to retrive data. Creating new record.");
-			sd.store_string_value(ActivityHelper.WH_DATA_NAME, "empty");
-			jObj = new JSONObject();
-			for(int i = 1; i <= ActivityHelper.WH_MAX_HIGHSCORES; i++) {
-				jObj.put("record" + i, null);
+		String data = sd.retrieve_string_value(Constants.WH_DATA_NAME);
+		try {
+			if(data.compareTo("empty") != 0) {
+				jObj = new JSONObject(data);
 			}
+			else {
+				Log.i(Constants.WH_LOG_WARN, "Failed to retrive data. Creating new record.");
+				sd.store_string_value(Constants.WH_DATA_NAME, "empty");
+				jObj = new JSONObject();
+				for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
+					jObj.put("record" + i, null);
+				}
+			}
+		} catch(JSONException j) {
+			Log.e(Constants.WH_LOG_ERRO, "Failed to create JSON object. Fatal error.");
+			// Do something.
 		}
 	};
 	
@@ -42,13 +47,13 @@ public class HighScore {
 	 */
 	public int hs_serialize(String name, int score) throws JSONException {
 		if(name == null || score <= 0) {
-			Log.i(ActivityHelper.WH_LOG_INFO, "Invalid name or score.");
+			Log.i(Constants.WH_LOG_INFO, "Invalid name or score.");
 			return -1;
 		}
 		
 		String record = hs_get_lowest(score);
 		if(record == null) {
-			Log.i(ActivityHelper.WH_LOG_ERRO, "Something wicked happened." +
+			Log.i(Constants.WH_LOG_ERRO, "Something wicked happened." +
 					" Failed to get lowest record.");
 			return -1;
 		}
@@ -73,10 +78,11 @@ public class HighScore {
 	@SuppressWarnings("unchecked")
 	public Map<String, String>[] hs_get_all() {
 		Map<String, String>[] array = (Map<String, String>[]) new Map[10];
-		for(int i = 0; i < ActivityHelper.WH_MAX_HIGHSCORES; i++) {
+		for(int i = 0; i < Constants.WH_MAX_HIGHSCORES; i++) {
 			try {
 				array[i] = (HashMap<String, String>) jObj.get("record" + (i+1));
 			} catch(JSONException j) {
+				Log.e(Constants.WH_LOG_ERRO, "JSON error occurred in hs_get_all()");
 				return null;
 			}
 		}
@@ -91,10 +97,10 @@ public class HighScore {
 	public boolean hs_close() {
 		String s = jObj.toString();
 		if(s == null) {
-			Log.i(ActivityHelper.WH_LOG_ERRO, "String conversion failed.");
+			Log.e(Constants.WH_LOG_ERRO, "String conversion failed.");
 			return false;
 		}
-		return sd.store_string_value(ActivityHelper.WH_DATA_NAME, s);
+		return sd.store_string_value(Constants.WH_DATA_NAME, s);
 	}
 	
 	/**
@@ -110,7 +116,7 @@ public class HighScore {
 		final String record = null;
 		
 		// Check if empty or exists
-		for(int i = 1; i <= ActivityHelper.WH_MAX_HIGHSCORES; i++) {
+		for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
 			int a = hs_get_score("record" + i);
 			if(score == a) {
 				is_empty = false;
@@ -121,7 +127,7 @@ public class HighScore {
 			}
 		}
 		if(score_exists) {
-			Log.i(ActivityHelper.WH_LOG_INFO, "Score exists. It has not been added.");
+			Log.i(Constants.WH_LOG_INFO, "Score exists. It has not been added.");
 			return "exists";
 		}
 		if(is_empty) {
@@ -129,7 +135,7 @@ public class HighScore {
 		}
 		
 		// Figure out where to put it and adjust.
-		for(int i = 1; i <= ActivityHelper.WH_MAX_HIGHSCORES; i++) {
+		for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
 			String rec = "record" + i;
 			int s = hs_get_score(rec);
 			if(s < 0) {
@@ -155,7 +161,7 @@ public class HighScore {
 		Map<String, String> tmp;
 		String r;
 		try {
-			for(int i = ActivityHelper.WH_MAX_HIGHSCORES; i >= rank; i--) {
+			for(int i = Constants.WH_MAX_HIGHSCORES; i >= rank; i--) {
 				r = "record" + (i - 1);
 				tmp = (HashMap<String, String>) jObj.get(r);
 				jObj.put("record" + i, tmp);
