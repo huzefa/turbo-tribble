@@ -52,9 +52,9 @@ public class GamePlay extends Activity {
 					check_timer.cancel();
 					countdown_timer.cancel(); 
 					
-					Log.i(ActivityHelper.WH_LOG_INFO, "Time Expired! Game over.");
-					Log.i(ActivityHelper.WH_LOG_INFO, "Level: " + level);
-					Log.i(ActivityHelper.WH_LOG_INFO, "Time given: " + (level * ActivityHelper.WH_TIMER_MULTIPLIER));
+					Log.i(Constants.WH_LOG_INFO, "Time Expired! Game over.");
+					Log.i(Constants.WH_LOG_INFO, "Level: " + level);
+					Log.i(Constants.WH_LOG_INFO, "Time given: " + (level * Constants.WH_TIMER_MULTIPLIER));
 					// TODO: Update the score screen here
 				}
 				if(button_pressed) {					
@@ -67,8 +67,8 @@ public class GamePlay extends Activity {
 						}
 					};
 					countdown_timer = new Timer();
-					countdown_timer.schedule(t, level * ActivityHelper.WH_TIMER_MULTIPLIER);
-					time_remaining = level * ActivityHelper.WH_TIMER_MULTIPLIER;
+					countdown_timer.schedule(t, level * Constants.WH_TIMER_MULTIPLIER);
+					time_remaining = level * Constants.WH_TIMER_MULTIPLIER;
 					
 					// Make it harder every two points
 					if(score % 2 == 0 && score > 0) {
@@ -97,7 +97,7 @@ public class GamePlay extends Activity {
 				});
 			}
 		};
-		check_timer.scheduleAtFixedRate(task, 0, ActivityHelper.WH_TIMER_CHECK_RATE);
+		check_timer.scheduleAtFixedRate(task, 0, Constants.WH_TIMER_CHECK_RATE);
 		
 		TimerTask t = new TimerTask() {
 			@Override
@@ -105,10 +105,10 @@ public class GamePlay extends Activity {
 				game_over = true;
 			}
 		};
-		countdown_timer.schedule(t, level * ActivityHelper.WH_TIMER_MULTIPLIER);
+		countdown_timer.schedule(t, level * Constants.WH_TIMER_MULTIPLIER);
 		
 		// Show the button the first time
-		time_remaining = level * ActivityHelper.WH_TIMER_MULTIPLIER;
+		time_remaining = level * Constants.WH_TIMER_MULTIPLIER;
 		show_random_button(button);
 	}
 	

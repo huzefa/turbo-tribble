@@ -45,7 +45,7 @@ public class SimpleDataStore {
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public boolean store_multi_string(String key, String value1, String value2) {
 		if(value1 == null || value2 == null) {
-			Log.i(ActivityHelper.WH_LOG_WARN, "Cannot store null value.");
+			Log.i(Constants.WH_LOG_WARN, "Cannot store null value.");
 			return false;
 		}
 		Set<String> set = new HashSet<String>(); ///< Set<type> is an interface
@@ -63,7 +63,7 @@ public class SimpleDataStore {
 	 */
 	public boolean store_string_value(String key, String value) {
 		if(value == null) {
-			Log.i(ActivityHelper.WH_LOG_WARN, "Cannot store null value.");
+			Log.i(Constants.WH_LOG_WARN, "Cannot store null value.");
 			return false;
 		}
 		editor.putString(key, value);

@@ -15,18 +15,8 @@ import android.view.WindowManager;
 
 public class ActivityHelper {
 	
-	public static final String WH_LOG_INFO = "WH_INFO";
-	public static final String WH_LOG_WARN = "WH_WARN";
-	public static final String WH_LOG_ERRO = "WH_ERRO";
-	
-	public static final String WH_DATA_NAME = "wh_data";
-	
-	public static long WH_TIMER_CHECK_RATE = 50;
-	public static long WH_TIMER_MULTIPLIER = 100;
-	public static double WH_LEVEL_DECAY_FACTOR = -0.1;
 	public static String WH_APP_NAME;
 	public static ContextWrapper context;
-	public static int WH_MAX_HIGHSCORES = 10;
 	
 	/**
 	 * This function must only be called on app init.
@@ -81,7 +71,7 @@ public class ActivityHelper {
 	 */
 	public static int get_new_level(long current_level) {
 		double result = 0;
-		result = Math.ceil(current_level * Math.exp(WH_LEVEL_DECAY_FACTOR));
+		result = Math.ceil(current_level * Math.exp(Constants.WH_LEVEL_DECAY_FACTOR));
 		return (int) result;
 	}
 }

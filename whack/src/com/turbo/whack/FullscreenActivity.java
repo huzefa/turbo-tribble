@@ -34,14 +34,14 @@ public class FullscreenActivity extends Activity {
 		instr_button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.d("MSG", "Instruction Button Pressed");			
+				Log.i(Constants.WH_LOG_INFO, "Instruction Button Pressed");			
 			}
 		});
 		instr_button.setOnFocusChangeListener(new OnFocusChangeListener() {
 
 			@Override
 			public void onFocusChange(View arg0, boolean arg1) {
-				Log.d("MSG", "Instruction Button Pressed: " + arg1);	
+				Log.i(Constants.WH_LOG_INFO, "Instruction Button Pressed: " + arg1);	
 			}
 		});
 		
