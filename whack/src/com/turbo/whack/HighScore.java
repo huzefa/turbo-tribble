@@ -21,7 +21,7 @@ public class HighScore {
 		sd = new SimpleDataStore(ActivityHelper.WH_APP_NAME);
 		String data = sd.retrieve_string_value(Constants.WH_DATA_NAME);
 		try {
-			if(data.compareTo("empty") != 0) {
+			if(data != null && data.compareTo("empty") != 0) {
 				jObj = new JSONObject(data);
 			}
 			else {
@@ -29,29 +29,38 @@ public class HighScore {
 				sd.store_string_value(Constants.WH_DATA_NAME, "empty");
 				jObj = new JSONObject();
 				for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
-					jObj.put("record" + i, null);
+					Map<String, String> m = new HashMap<String, String>();
+					m.put("name", "empty");
+					m.put("score", "empty");
+					jObj.put("record" + Integer.toString(i), m);
 				}
 			}
 		} catch(JSONException j) {
 			Log.e(Constants.WH_LOG_ERRO, "Failed to create JSON object. Fatal error.");
+			j.printStackTrace();
 			// Do something.
 		}
 	};
 	
 	/**
+	 * TODO: Don't mention we're using JSON under the covers.
 	 * This function serializes the data to work with JSON and modifies the JSON file accordingly.
 	 * @param name The name associated with the highscore. Cannot be null.
 	 * @param score The score associated with the highscore. Must be greater than zero.
 	 * @return Zero on success. Non-zero on failure.
 	 * @throws JSONException
 	 */
-	public int hs_serialize(String name, int score) throws JSONException {
+	public int hs_add(String name, int score) {
 		if(name == null || score <= 0) {
 			Log.i(Constants.WH_LOG_INFO, "Invalid name or score.");
 			return -1;
 		}
-		
-		String record = hs_get_lowest(score);
+		String record = null;
+		try {
+			record = hs_get_lowest(score);
+		} catch(JSONException j) {
+			j.printStackTrace();
+		}
 		if(record == null) {
 			Log.i(Constants.WH_LOG_ERRO, "Something wicked happened." +
 					" Failed to get lowest record.");
@@ -63,8 +72,12 @@ public class HighScore {
 		
 		Map<String, String> map = new HashMap<String, String>(); ///< Optimization options available.
 		map.put("name", name);
-		map.put("score", Integer.toString(score));	
-		jObj.put(record, map);
+		map.put("score", Integer.toString(score));
+		try {
+			jObj.put(record, map);
+		} catch(JSONException j) {
+			j.printStackTrace();
+		}
 		return 0;
 	}
 	
@@ -80,7 +93,7 @@ public class HighScore {
 		Map<String, String>[] array = (Map<String, String>[]) new Map[10];
 		for(int i = 0; i < Constants.WH_MAX_HIGHSCORES; i++) {
 			try {
-				array[i] = (HashMap<String, String>) jObj.get("record" + (i+1));
+				array[i] = (HashMap<String, String>) jObj.get("record" + Integer.toString(i+1));
 			} catch(JSONException j) {
 				Log.e(Constants.WH_LOG_ERRO, "JSON error occurred in hs_get_all()");
 				return null;
@@ -117,7 +130,7 @@ public class HighScore {
 		
 		// Check if empty or exists
 		for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
-			int a = hs_get_score("record" + i);
+			int a = hs_get_score("record" + Integer.toString(i));
 			if(score == a) {
 				is_empty = false;
 				score_exists = true;
@@ -136,7 +149,7 @@ public class HighScore {
 		
 		// Figure out where to put it and adjust.
 		for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
-			String rec = "record" + i;
+			String rec = "record" + Integer.toString(i);
 			int s = hs_get_score(rec);
 			if(s < 0) {
 				return rec;
@@ -162,11 +175,11 @@ public class HighScore {
 		String r;
 		try {
 			for(int i = Constants.WH_MAX_HIGHSCORES; i >= rank; i--) {
-				r = "record" + (i - 1);
+				r = "record" + Integer.toString(i - 1);
 				tmp = (HashMap<String, String>) jObj.get(r);
-				jObj.put("record" + i, tmp);
+				jObj.put("record" + Integer.toString(i), tmp);
 			}		
-			jObj.put("record" + rank, null);
+			jObj.put("record" + Integer.toString(rank), null);
 		} catch(JSONException j) {
 			return -1;
 		}
@@ -182,8 +195,8 @@ public class HighScore {
 	@SuppressWarnings("unchecked")
 	private int hs_get_score(String record) throws JSONException {
 		int res;
+		Log.i(Constants.WH_LOG_INFO, jObj.toString(4));
 		Map<String, String> map = (HashMap<String, String>) jObj.get(record);
-		
 		try {
 			res = Integer.parseInt(map.get("score"));
 		} catch(NumberFormatException e) {
