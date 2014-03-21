@@ -11,6 +11,7 @@ import org.json.JSONException;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ListView;
 
@@ -25,6 +26,8 @@ public class HighScoreActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		ActivityHelper.activity_init(this);
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_high_score);
 		
@@ -36,19 +39,18 @@ public class HighScoreActivity extends Activity {
 		names = new ArrayList<String>();
 		
 		//Get high scores
-		HighScore hScoreInst = null;
+		HighScore hScoreInst = new HighScore();
 		Map<String, String>[] hScoreMap;
-		try {
-			hScoreInst = new HighScore();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		HashMap<String, String> temp;
 		
-		// This gives me a null pointer exception... I don't think it's returning anything.
-//		synchronized(hScoreInst) {
-//			hScoreMap = hScoreInst.hs_get_all();
-//			Log.d("HSCORE MAP LENGTH", hScoreMap.length + "");
-//		}		
+		hScoreMap = hScoreInst.hs_get_all();
+		if(hScoreMap == null) {
+			Log.e(Constants.WH_LOG_ERRO, "Failed to retrieve HighScores.");
+			assert(false);
+		}
+		for(int i = 0; i < Constants.WH_MAX_HIGHSCORES; i++) {
+			temp = (HashMap<String, String>) hScoreMap[i];
+		}
 		
 		names.add("Dhairya");
 		names.add("Huzefa");
@@ -73,17 +75,6 @@ public class HighScoreActivity extends Activity {
 		}
 		
 		HighScoreListViewAdapter hScore_adapter = new HighScoreListViewAdapter(this,hScore_list);
-		listView_hScore.setAdapter(hScore_adapter);
-		
-		
-		
+		listView_hScore.setAdapter(hScore_adapter);	
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.high_score, menu);
-		return true;
-	}
-
 }
