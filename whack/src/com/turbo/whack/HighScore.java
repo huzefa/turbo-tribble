@@ -71,7 +71,7 @@ public class HighScore {
 		}
 		if(record.compareTo("notHS") == 0) {
 			Log.i(Constants.WH_LOG_INFO, name + " didn't make the highscore charts " +
-					"with his miserly score of " + Integer.toString(score));
+					"with their miserly score of " + Integer.toString(score));
 			return 0;
 		}
 		
