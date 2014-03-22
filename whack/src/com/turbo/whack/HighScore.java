@@ -62,11 +62,16 @@ public class HighScore {
 			j.printStackTrace();
 		}
 		if(record == null) {
-			Log.i(Constants.WH_LOG_ERRO, "Something wicked happened." +
+			Log.e(Constants.WH_LOG_ERRO, "[hs_add()]:Something wicked happened." +
 					" Failed to get lowest record.");
 			return -1;
 		}
 		if(record.compareTo("exists") == 0) {
+			return 0;
+		}
+		if(record.compareTo("notHS") == 0) {
+			Log.i(Constants.WH_LOG_INFO, name + " didn't make the highscore charts " +
+					"with his miserly score of " + Integer.toString(score));
 			return 0;
 		}
 		
@@ -75,6 +80,7 @@ public class HighScore {
 		map.put("score", Integer.toString(score));
 		try {
 			jObj.put(record, map);
+			Log.i(Constants.WH_LOG_INFO, jObj.toString(4));
 		} catch(JSONException j) {
 			j.printStackTrace();
 		}
@@ -85,21 +91,12 @@ public class HighScore {
 	
 	/**
 	 * A API that returns a sorted array of size 10 with the highscores. Make sure you cast the
-	 * object stored to HashMap<String, String> before use.
-	 * @return An array of type Map<String, String>[]. Returns null on failure.
+	 * object stored to HashMap<String, Map<String, String>> before use.
+	 * @return An array of type Map<String, Map<String, String>>[]. Returns null on failure.
 	 */
 	@SuppressWarnings("unchecked")
-	public Map<String, String>[] hs_get_all() {
-		Map<String, String>[] array = (Map<String, String>[]) new Map[10];
-		for(int i = 0; i < Constants.WH_MAX_HIGHSCORES; i++) {
-			try {
-				array[i] = (HashMap<String, String>) jObj.get("record" + Integer.toString(i+1));
-			} catch(JSONException j) {
-				Log.e(Constants.WH_LOG_ERRO, "JSON error occurred in hs_get_all()");
-				return null;
-			}
-		}
-		return array;	
+	public Map<String, Map<String, String>>[] hs_get_all() {
+		return null;
 	}
 	
 	/**
@@ -152,15 +149,16 @@ public class HighScore {
 			String rec = "record" + Integer.toString(i);
 			int s = hs_get_score(rec);
 			if(s < 0) {
+				Log.w(Constants.WH_LOG_WARN, "[hs_get_lowest()]:Should have never gotten here.");
 				return rec;
 			}
-			if(i < score) {
+			if(score > s) {
 				hs_push_down(i);
 				return rec;
 			}
 		}
 		// The score is not a high score.
-		return null;
+		return "notHS";
 	}
 	
 	/**
