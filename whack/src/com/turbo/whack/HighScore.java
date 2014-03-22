@@ -1,6 +1,8 @@
 package com.turbo.whack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -90,13 +92,24 @@ public class HighScore {
 	// hs_deserialize();
 	
 	/**
-	 * A API that returns a sorted array of size 10 with the highscores. Make sure you cast the
-	 * object stored to HashMap<String, Map<String, String>> before use.
-	 * @return An array of type Map<String, Map<String, String>>[]. Returns null on failure.
+	 * A API that returns a sorted array of size WH_MAX_HIGHSCORES with the highscores. Make sure you cast the
+	 * object stored to HashMap<String, String> before use.
+	 * @return An array of type List<Map<String, String>>. Returns null on failure.
 	 */
 	@SuppressWarnings("unchecked")
-	public Map<String, Map<String, String>>[] hs_get_all() {
-		return null;
+	public List<Map<String, String>> hs_get_all() {
+		List<Map<String, String>> map = new ArrayList<Map<String, String>>();
+		for(int i = 0; i < Constants.WH_MAX_HIGHSCORES; i++) {
+			try {
+				String r = "record" + Integer.toString(i+1);
+				Map<String, String> tmp = (HashMap<String, String>) jObj.get(r);
+				map.add(tmp);
+			} catch(JSONException j) {
+				j.printStackTrace();
+				return null;
+			}
+		}
+		return map;
 	}
 	
 	/**
@@ -193,7 +206,6 @@ public class HighScore {
 	@SuppressWarnings("unchecked")
 	private int hs_get_score(String record) throws JSONException {
 		int res;
-		Log.i(Constants.WH_LOG_INFO, jObj.toString(4));
 		Map<String, String> map = (HashMap<String, String>) jObj.get(record);
 		try {
 			res = Integer.parseInt(map.get("score"));
