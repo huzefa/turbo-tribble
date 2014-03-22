@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import static com.turbo.whack.Constants.NAME;
-import static com.turbo.whack.Constants.SCORE;
 
 public class HighScoreListViewAdapter extends BaseAdapter{
 	Activity activity;
@@ -42,8 +40,8 @@ public class HighScoreListViewAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 		HashMap<?, ?> map = list.get(position);
-		holder.name.setText((CharSequence) map.get(NAME));
-		holder.score.setText((CharSequence) map.get(SCORE));
+		holder.name.setText((CharSequence) map.get("Name"));
+		holder.score.setText((CharSequence) map.get("Score"));
 		return convertView;
 	}	
 	

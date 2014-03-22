@@ -1,8 +1,6 @@
 package com.turbo.whack;
 
 public class Constants {
-	public static final String NAME = "Name";
-	public static final String SCORE = "Score";	
 	public static final String WH_LOG_INFO = "WH_INFO";
 	public static final String WH_LOG_WARN = "WH_WARN";
 	public static final String WH_LOG_ERRO = "WH_ERRO";
