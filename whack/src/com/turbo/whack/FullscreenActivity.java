@@ -21,7 +21,7 @@ public class FullscreenActivity extends Activity {
 		setContentView(R.layout.activity_fullscreen);
 		
 		Button start_button = (Button) findViewById(R.id.start_button);
-		Button instr_button = (Button) findViewById(R.id.instructions_button);
+		Button test = (Button) findViewById(R.id.test_button);
 		Button high_score = (Button) findViewById(R.id.high_score_button);
 		start_button.setOnClickListener(new OnClickListener() {
 			@Override
@@ -29,26 +29,12 @@ public class FullscreenActivity extends Activity {
 				Intent intent = new Intent(FullscreenActivity.this, GamePlay.class);
 				FullscreenActivity.this.startActivity(intent);
 			}	
-		});
-		
-		instr_button.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.i(Constants.WH_LOG_INFO, "Instruction Button Pressed");			
-			}
-		});
-		instr_button.setOnFocusChangeListener(new OnFocusChangeListener() {
-
-			@Override
-			public void onFocusChange(View arg0, boolean arg1) {
-				Log.i(Constants.WH_LOG_INFO, "Instruction Button Pressed: " + arg1);	
-			}
-		});
-		
+		});	
 		high_score.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(FullscreenActivity.this, HighScoreActivity.class));				
+				Intent intent = new Intent(FullscreenActivity.this, HighScoreActivity.class);
+				FullscreenActivity.this.startActivity(intent);				
 			}
 		});
 	}
