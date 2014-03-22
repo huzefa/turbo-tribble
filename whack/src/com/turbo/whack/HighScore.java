@@ -17,17 +17,18 @@ public class HighScore {
 	
 	/**
 	 * Highscore object constructor.
-	 * @throws JSONException Non recoverable.
 	 */
 	public HighScore() {
 		sd = new SimpleDataStore(ActivityHelper.WH_APP_NAME);
 		String data = sd.retrieve_string_value(Constants.WH_DATA_NAME);
 		try {
 			if(data != null && data.compareTo("empty") != 0) {
+				// Simply load the object from memory
 				jObj = new JSONObject(data);
 			}
 			else {
-				Log.i(Constants.WH_LOG_WARN, "Failed to retrive data. Creating new record.");
+				// Create a new copy and initialize
+				Log.i(Constants.WH_LOG_WARN, "Possibly failed to retrive data. Creating new record.");
 				sd.store_string_value(Constants.WH_DATA_NAME, "empty");
 				jObj = new JSONObject();
 				for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
@@ -40,35 +41,39 @@ public class HighScore {
 		} catch(JSONException j) {
 			Log.e(Constants.WH_LOG_ERRO, "Failed to create JSON object. Fatal error.");
 			j.printStackTrace();
-			// Do something.
+			// Fail silently. Cannot recover.
 		}
 	};
 	
 	/**
 	 * TODO: Don't mention we're using JSON under the covers.
-	 * This function serializes the data to work with JSON and modifies the JSON file accordingly.
+	 * This function adds the data if the high score deserves to be added.
 	 * @param name The name associated with the highscore. Cannot be null.
 	 * @param score The score associated with the highscore. Must be greater than zero.
 	 * @return Zero on success. Non-zero on failure.
-	 * @throws JSONException
 	 */
 	public int hs_add(String name, int score) {
+		// You messed up. You're not supposed to pass invalid arguments.
 		if(name == null || score <= 0) {
 			Log.i(Constants.WH_LOG_INFO, "Invalid name or score.");
 			return -1;
 		}
+		
+		// Where can I put the score?
 		String record = null;
 		try {
 			record = hs_get_lowest(score);
 		} catch(JSONException j) {
 			j.printStackTrace();
 		}
+		// We error'ed out somewhere. Cannot tell where the failure occured. Will silently fail.
 		if(record == null) {
 			Log.e(Constants.WH_LOG_ERRO, "[hs_add()]:Something wicked happened." +
 					" Failed to get lowest record.");
 			return -1;
 		}
 		if(record.compareTo("exists") == 0) {
+			Log.i(Constants.WH_LOG_INFO, "Sorry " + name + "! This score already exists!");
 			return 0;
 		}
 		if(record.compareTo("notHS") == 0) {
@@ -77,20 +82,18 @@ public class HighScore {
 			return 0;
 		}
 		
-		Map<String, String> map = new HashMap<String, String>(); ///< Optimization options available.
+		// HF: It may be possible to optimize this.
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("name", name);
 		map.put("score", Integer.toString(score));
 		try {
 			jObj.put(record, map);
-			Log.i(Constants.WH_LOG_INFO, jObj.toString(4));
 		} catch(JSONException j) {
 			j.printStackTrace();
 		}
 		return 0;
 	}
-	
-	// hs_deserialize();
-	
+		
 	/**
 	 * A API that returns a sorted array of size WH_MAX_HIGHSCORES with the highscores. Make sure you cast the
 	 * object stored to HashMap<String, String> before use.
@@ -116,11 +119,13 @@ public class HighScore {
 	 * A function that must be called to save the highscores to memory to be loaded next time.
 	 * Make sure that you call this function before losing the object or there is no guarantee that
 	 * the scores will be recorded.
+	 * 
+	 * @return False on failure. True otherwise.
 	 */
 	public boolean hs_close() {
 		String s = jObj.toString();
 		if(s == null) {
-			Log.e(Constants.WH_LOG_ERRO, "String conversion failed.");
+			Log.e(Constants.WH_LOG_ERRO, "JSON to string conversion failed.");
 			return false;
 		}
 		return sd.store_string_value(Constants.WH_DATA_NAME, s);
@@ -132,11 +137,9 @@ public class HighScore {
 	 * @return A string that is the record name. Null if not a highscore.
 	 * @throws JSONException If we catch this, there is very little possibility of recovery.
 	 */
-	@SuppressWarnings("unchecked")
 	private String hs_get_lowest(int score) throws JSONException {
 		boolean is_empty = true;
 		boolean score_exists = false;
-		final String record = null;
 		
 		// Check if empty or exists
 		for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
@@ -154,6 +157,7 @@ public class HighScore {
 			return "exists";
 		}
 		if(is_empty) {
+			Log.i(Constants.WH_LOG_INFO, "The score table was empty! You made it.");
 			return "record1";
 		}
 		
@@ -162,7 +166,7 @@ public class HighScore {
 			String rec = "record" + Integer.toString(i);
 			int s = hs_get_score(rec);
 			if(s < 0) {
-				Log.w(Constants.WH_LOG_WARN, "[hs_get_lowest()]:Should have never gotten here.");
+				Log.w(Constants.WH_LOG_WARN, "[hs_get_lowest()]:We should never have gotten here. It has been safely handled though.");
 				return rec;
 			}
 			if(score > s) {
@@ -180,7 +184,6 @@ public class HighScore {
 	 * @return zero on success
 	 * @throws JSONException Non-recoverable.
 	 */
-	@SuppressWarnings("unchecked")
 	private int hs_push_down(int rank) {
 		Map<String, String> tmp;
 		String r;
@@ -203,9 +206,9 @@ public class HighScore {
 	 * @return An integer that represents the score. -1 on failure.
 	 * @throws JSONException
 	 */
-	@SuppressWarnings("unchecked")
 	private int hs_get_score(String record) throws JSONException {
 		int res;
+		@SuppressWarnings("unchecked") // HF: The compiler is being pedantic about unchecked casting.
 		Map<String, String> map = (HashMap<String, String>) jObj.get(record);
 		try {
 			res = Integer.parseInt(map.get("score"));
