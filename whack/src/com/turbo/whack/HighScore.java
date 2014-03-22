@@ -46,7 +46,6 @@ public class HighScore {
 	};
 	
 	/**
-	 * TODO: Don't mention we're using JSON under the covers.
 	 * This function adds the data if the high score deserves to be added.
 	 * @param name The name associated with the highscore. Cannot be null.
 	 * @param score The score associated with the highscore. Must be greater than zero.
