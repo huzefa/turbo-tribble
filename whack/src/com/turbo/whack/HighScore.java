@@ -138,21 +138,18 @@ public class HighScore {
 	 */
 	private String hs_get_lowest(String name, int score) throws JSONException {
 		boolean is_empty = true;
-		boolean score_exists = false;
-		boolean duplicate_found = false;
 		int index = 0;
 		String rec = null;
 		
 		// Check if empty or exists or is a duplicate
 		for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
 			rec = "record" + Integer.toString(i);
-			String iname = hs_get_name(rec);
 			int a = hs_get_score(rec);
-			
-			if(iname.compareTo(name) == 0 && a < score) {
-				Log.i(Constants.WH_LOG_INFO, "Duplicate record found. Record has been updated.");
-				duplicate_found = true;
-			}			
+//			String iname = hs_get_name(rec);
+//			
+//			if(iname.compareTo(name) == 0 && a < score) {
+//				Log.i(Constants.WH_LOG_INFO, "Duplicate record found.");
+//			}			
 			if(score == a) {
 				is_empty = false;
 				int j = i;
@@ -177,7 +174,8 @@ public class HighScore {
 			rec = "record" + Integer.toString(i);
 			int s = hs_get_score(rec);
 			if(s < 0) {
-				Log.w(Constants.WH_LOG_WARN, "[hs_get_lowest()]:We should never have gotten here. It has been safely handled though.");
+				Log.w(Constants.WH_LOG_WARN, "[hs_get_lowest()]:We should never have gotten here. " +
+						"It has been safely handled though.");
 				return rec;
 			}
 			if(score > s) {
@@ -213,7 +211,7 @@ public class HighScore {
 	
 	/**
 	 * A private function that gets the score from a record.
-	 * @param record
+	 * @param record A string
 	 * @return An integer that represents the score. -1 on failure.
 	 * @throws JSONException
 	 */
@@ -229,6 +227,12 @@ public class HighScore {
 		return res;
 	}
 	
+	/**
+	 * A private function that gets the name from a record.
+	 * @param record A string
+	 * @return A string that represents the name.
+	 * @throws JSONException
+	 */
 	private String hs_get_name(String record) throws JSONException {
 		String res;
 		@SuppressWarnings("unchecked")
