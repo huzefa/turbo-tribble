@@ -61,7 +61,7 @@ public class HighScore {
 		// Where can I put the score?
 		String record = null;
 		try {
-			record = hs_get_lowest(score);
+			record = hs_get_lowest(name, score);
 		} catch(JSONException j) {
 			j.printStackTrace();
 		}
@@ -72,7 +72,7 @@ public class HighScore {
 			return -1;
 		}
 		if(record.compareTo("exists") == 0) {
-			Log.i(Constants.WH_LOG_INFO, "Sorry " + name + "! This score already exists!");
+			Log.i(Constants.WH_LOG_INFO, "Sorry " + name + "! No more room.");
 			return 0;
 		}
 		if(record.compareTo("notHS") == 0) {
@@ -136,33 +136,45 @@ public class HighScore {
 	 * @return A string that is the record name. Null if not a highscore.
 	 * @throws JSONException If we catch this, there is very little possibility of recovery.
 	 */
-	private String hs_get_lowest(int score) throws JSONException {
+	private String hs_get_lowest(String name, int score) throws JSONException {
 		boolean is_empty = true;
 		boolean score_exists = false;
+		boolean duplicate_found = false;
+		int index = 0;
+		String rec = null;
 		
-		// Check if empty or exists
+		// Check if empty or exists or is a duplicate
 		for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
-			int a = hs_get_score("record" + Integer.toString(i));
+			rec = "record" + Integer.toString(i);
+			String iname = hs_get_name(rec);
+			int a = hs_get_score(rec);
+			
+			if(iname.compareTo(name) == 0 && a < score) {
+				Log.i(Constants.WH_LOG_INFO, "Duplicate record found. Record has been updated.");
+				duplicate_found = true;
+			}			
 			if(score == a) {
 				is_empty = false;
-				score_exists = true;
+				int j = i;
+				while(hs_get_score("record" + Integer.toString(j)) == a) {
+					j++;
+					if(j == 11) break;
+				}
+				if(j == Constants.WH_MAX_HIGHSCORES) return "exists";
+				hs_push_down(j);
+				return "record" + Integer.toString(j);
 			}
 			if(a != -1) {
 				is_empty = false;
 			}
 		}
-		if(score_exists) {
-			Log.i(Constants.WH_LOG_INFO, "Score exists. It has not been added.");
-			return "exists";
-		}
 		if(is_empty) {
 			Log.i(Constants.WH_LOG_INFO, "The score table was empty! You made it.");
 			return "record1";
 		}
-		
 		// Figure out where to put it and adjust.
-		for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
-			String rec = "record" + Integer.toString(i);
+		for(int i = index > 0 ? index : 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
+			rec = "record" + Integer.toString(i);
 			int s = hs_get_score(rec);
 			if(s < 0) {
 				Log.w(Constants.WH_LOG_WARN, "[hs_get_lowest()]:We should never have gotten here. It has been safely handled though.");
@@ -214,6 +226,14 @@ public class HighScore {
 		} catch(NumberFormatException e) {
 			return -1;
 		}
+		return res;
+	}
+	
+	private String hs_get_name(String record) throws JSONException {
+		String res;
+		@SuppressWarnings("unchecked")
+		Map<String, String> map = (HashMap<String, String>) jObj.get(record);
+		res = map.get("name");
 		return res;
 	}
 }

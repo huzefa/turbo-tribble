@@ -32,18 +32,34 @@ public class HighScoreActivity extends Activity {
 		names = new ArrayList<String>();
 		HighScore hScoreInst = new HighScore();
 		
-		// HF: This is for testing purposes only.
-		hScoreInst.hs_add("P1", 5);
-		hScoreInst.hs_add("P2", 9);
-		hScoreInst.hs_add("P3", 7);
-		hScoreInst.hs_add("P4", 4);
-		hScoreInst.hs_add("P5", 2);
-		hScoreInst.hs_add("P6", 10);
-		hScoreInst.hs_add("P7", 3);
-		hScoreInst.hs_add("P9", 8);
-		hScoreInst.hs_add("P10", 6);
-		hScoreInst.hs_add("P11", 20);
+//		// HF: This is for testing purposes only.
+//		hScoreInst.hs_add("P1", 5);
+//		hScoreInst.hs_add("P2", 9);
+//		hScoreInst.hs_add("P3", 7);
+//		hScoreInst.hs_add("P4", 4);
+//		hScoreInst.hs_add("P25", 20);
+//		hScoreInst.hs_add("P25", 19);
+//		hScoreInst.hs_add("P5", 2);
+//		hScoreInst.hs_add("P6", 10);
+//		hScoreInst.hs_add("P7", 3);
+//		hScoreInst.hs_add("P9", 8);
+//		hScoreInst.hs_add("P10", 6);
+//		hScoreInst.hs_add("P11", 20);
+//		hScoreInst.hs_add("Dhairya", 1);
+//		hScoreInst.hs_add("P9", 21);
+//		hScoreInst.hs_add("P26", 20);
+		
+		// HF: Alternate test
 		hScoreInst.hs_add("Dhairya", 1);
+		hScoreInst.hs_add("Dhairya", 5);
+		hScoreInst.hs_add("Dhairya", 4);
+		hScoreInst.hs_add("Dhairya", 2);
+		hScoreInst.hs_add("Dhairya", 7);
+		hScoreInst.hs_add("Dhairya", 6);
+		hScoreInst.hs_add("Dhairya", 3);
+		hScoreInst.hs_add("Dhairya", 9);
+		hScoreInst.hs_add("Dhairya", 8);
+		hScoreInst.hs_add("Dhairya", 10);
 		
 		// TODO: HF: See if everything under this can be tightened up
 		List<Map<String, String>> hs_map = hScoreInst.hs_get_all();
