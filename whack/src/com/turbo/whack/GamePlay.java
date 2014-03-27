@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class GamePlay extends Activity {
-	private static final int WH_BUTTON_MAP = 74;
+	private static final int WH_BUTTON_MAP = 44;
 	
 	private Timer check_timer = new Timer();
 	private Timer countdown_timer = new Timer();
@@ -55,7 +55,8 @@ public class GamePlay extends Activity {
 					Log.i(Constants.WH_LOG_INFO, "Time Expired! Game over.");
 					Log.i(Constants.WH_LOG_INFO, "Level: " + level);
 					Log.i(Constants.WH_LOG_INFO, "Time given: " + (level * Constants.WH_TIMER_MULTIPLIER));
-					// TODO: Update the score screen here
+					
+					// Add score to screen
 				}
 				if(button_pressed) {					
 					// Restart the timeout timer
@@ -143,7 +144,6 @@ public class GamePlay extends Activity {
 			}
 		});
 		b.startAnimation(vanish);
-//		hide_button(b);
 	}
 	
 	/**
@@ -185,7 +185,7 @@ public class GamePlay extends Activity {
 	 */
 	private Button[] get_button_handles() {
 		Button button_array[] = new Button[WH_BUTTON_MAP];
-		for(int i = 0; i < 74; i++) {
+		for(int i = 0; i < 44; i++) {
 			button_array[i] = null;
 			
 		}
@@ -202,15 +202,6 @@ public class GamePlay extends Activity {
 		button_array[41] = (Button) findViewById(R.id.Button41);
 		button_array[42] = (Button) findViewById(R.id.Button42);
 		button_array[43] = (Button) findViewById(R.id.Button43);
-		button_array[51] = (Button) findViewById(R.id.Button51);
-		button_array[52] = (Button) findViewById(R.id.Button52);
-		button_array[53] = (Button) findViewById(R.id.Button53);
-		button_array[61] = (Button) findViewById(R.id.Button61);
-		button_array[62] = (Button) findViewById(R.id.Button62);
-		button_array[63] = (Button) findViewById(R.id.Button63);
-		button_array[71] = (Button) findViewById(R.id.Button71);
-		button_array[72] = (Button) findViewById(R.id.Button72);
-		button_array[73] = (Button) findViewById(R.id.Button73);
 		
 		return button_array;
 	}

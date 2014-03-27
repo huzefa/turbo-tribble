@@ -52,9 +52,9 @@ public class ActivityHelper {
 		int res;
 		
 		Random r = new Random();
-		num = r.nextInt(75 - 10);
+		num = r.nextInt(45 - 10);
 		num = Math.round((num + 5)/ 10.0) * 10.0;
-		num = num +	(r.nextInt(75 - 10) % 4);
+		num = num +	(r.nextInt(45 - 10) % 4);
 		res = (int) num;
 		
 		// HF: We should be able to filter out this case without doing this.

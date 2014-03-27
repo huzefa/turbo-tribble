@@ -50,16 +50,16 @@ public class HighScoreActivity extends Activity {
 //		hScoreInst.hs_add("P26", 20);
 		
 		// HF: Alternate test
-		hScoreInst.hs_add("Dhairya", 1);
-		hScoreInst.hs_add("Dhairya", 5);
-		hScoreInst.hs_add("Dhairya", 4);
-		hScoreInst.hs_add("Dhairya", 2);
-		hScoreInst.hs_add("Dhairya", 7);
-		hScoreInst.hs_add("Dhairya", 6);
-		hScoreInst.hs_add("Dhairya", 3);
-		hScoreInst.hs_add("Dhairya", 9);
-		hScoreInst.hs_add("Dhairya", 8);
-		hScoreInst.hs_add("Dhairya", 10);
+//		hScoreInst.hs_add("Dhairya", 1);
+//		hScoreInst.hs_add("Dhairya", 5);
+//		hScoreInst.hs_add("Dhairya", 4);
+//		hScoreInst.hs_add("Dhairya", 2);
+//		hScoreInst.hs_add("Dhairya", 7);
+//		hScoreInst.hs_add("Dhairya", 6);
+//		hScoreInst.hs_add("Dhairya", 3);
+//		hScoreInst.hs_add("Dhairya", 9);
+//		hScoreInst.hs_add("Dhairya", 8);
+//		hScoreInst.hs_add("Dhairya", 10);
 		
 		// TODO: HF: See if everything under this can be tightened up
 		List<Map<String, String>> hs_map = hScoreInst.hs_get_all();
