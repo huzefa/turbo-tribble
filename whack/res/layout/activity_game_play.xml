@@ -19,30 +19,35 @@
         <Button
             android:id="@+id/Button11"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
             android:id="@+id/Button12"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
             android:id="@+id/Button13"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -54,30 +59,35 @@
         <Button
             android:id="@+id/Button21"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
             android:id="@+id/Button22"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
             android:id="@+id/Button23"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -89,30 +99,35 @@
         <Button
             android:id="@+id/Button31"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
             android:id="@+id/Button32"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
             android:id="@+id/Button33"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -124,134 +139,36 @@
         <Button
             android:id="@+id/Button41"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
             android:id="@+id/Button42"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
 
         <Button
             android:id="@+id/Button43"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/mole_button_pressed"
             android:onClick="game_button_clicked"
             android:text="Button" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/LinearLayout_row5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
-
-        <Button
-            android:id="@+id/Button51"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="game_button_clicked"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/Button52"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="game_button_clicked"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/Button53"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="game_button_clicked"
-            android:text="Button" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/LinearLayout_row6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
-
-        <Button
-            android:id="@+id/Button61"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="game_button_clicked"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/Button62"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="game_button_clicked"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/Button63"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="game_button_clicked"
-            android:text="Button" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/LinearLayout_row7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
-
-        <Button
-            android:id="@+id/Button71"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="game_button_clicked"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/Button72"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="game_button_clicked"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/Button73"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="game_button_clicked"
-            android:text="Button" />
     </LinearLayout>
 
     <LinearLayout
