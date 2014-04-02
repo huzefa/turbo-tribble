@@ -19,7 +19,7 @@
         android:layout_below="@+id/start_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
-        android:background="@drawable/custom_mole_button" />
+        android:background="@drawable/mosquito_button" />
 
     <Button
         android:id="@+id/high_score_button"

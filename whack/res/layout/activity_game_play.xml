@@ -23,9 +23,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
 
         <Button
             android:id="@+id/Button12"
@@ -34,9 +34,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
 
         <Button
             android:id="@+id/Button13"
@@ -45,9 +45,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
     </LinearLayout>
 
     <LinearLayout
@@ -63,9 +63,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
 
         <Button
             android:id="@+id/Button22"
@@ -74,9 +74,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
 
         <Button
             android:id="@+id/Button23"
@@ -85,9 +85,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
     </LinearLayout>
 
     <LinearLayout
@@ -103,9 +103,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
 
         <Button
             android:id="@+id/Button32"
@@ -114,9 +114,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
 
         <Button
             android:id="@+id/Button33"
@@ -125,9 +125,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
     </LinearLayout>
 
     <LinearLayout
@@ -143,9 +143,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
 
         <Button
             android:id="@+id/Button42"
@@ -154,9 +154,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
 
         <Button
             android:id="@+id/Button43"
@@ -165,9 +165,9 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/mole_button_pressed"
+            android:background="@drawable/mosquito_button"
             android:onClick="game_button_clicked"
-            android:text="Button" />
+             />
 
     </LinearLayout>
 
