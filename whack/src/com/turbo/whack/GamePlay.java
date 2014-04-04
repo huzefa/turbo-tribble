@@ -57,6 +57,9 @@ public class GamePlay extends Activity {
 					Log.i(Constants.WH_LOG_INFO, "Time given: " + (level * Constants.WH_TIMER_MULTIPLIER));
 					
 					// Add score to screen
+					HighScore h = new HighScore();
+					h.hs_add("NONAME", score);
+					h.hs_close();
 				}
 				if(button_pressed) {					
 					// Restart the timeout timer

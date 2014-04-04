@@ -21,8 +21,8 @@ public class FullscreenActivity extends Activity {
 		setContentView(R.layout.activity_fullscreen);
 		
 		Button start_button = (Button) findViewById(R.id.start_button);
-		Button test = (Button) findViewById(R.id.test_button);
 		Button high_score = (Button) findViewById(R.id.high_score_button);
+		
 		start_button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {

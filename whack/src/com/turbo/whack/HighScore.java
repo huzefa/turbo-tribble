@@ -16,27 +16,41 @@ public class HighScore {
 	private JSONObject jObj;
 	
 	/**
-	 * Highscore object constructor.
+	 * Highscore object constructor. It is highly recommended that you do not make any highscore calls
+	 * on the UI thread.
 	 */
-	public HighScore() {
+	public HighScore() { 
 		sd = new SimpleDataStore(ActivityHelper.WH_APP_NAME);
 		String data = sd.retrieve_string_value(Constants.WH_DATA_NAME);
 		try {
+			// Create a new copy and initialize
+			jObj = new JSONObject();
+			sd.store_string_value(Constants.WH_DATA_NAME, "empty");
+			for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
+				Map<String, String> m = new HashMap<String, String>();
+				m.put("name", "empty");
+				m.put("score", "empty");
+				jObj.put("record" + Integer.toString(i), m);
+			}
 			if(data != null && data.compareTo("empty") != 0) {
-				// Simply load the object from memory
-				jObj = new JSONObject(data);
+				// Simply load the nested JSON objects from memory
+				JSONObject jTmp = new JSONObject(data);
+				for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
+					String r = "record" + Integer.toString(i);
+					JSONObject j;
+					int score;
+					try {
+						j = new JSONObject(jTmp.getString(r));
+						score = Integer.parseInt(j.getString("score"));
+						hs_add(j.getString("name"), score);
+					} catch(NumberFormatException n) {
+						continue;
+					}
+				}
+				hs_close();
 			}
 			else {
-				// Create a new copy and initialize
-				Log.i(Constants.WH_LOG_WARN, "Possibly failed to retrive data. Creating new record.");
-				sd.store_string_value(Constants.WH_DATA_NAME, "empty");
-				jObj = new JSONObject();
-				for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
-					Map<String, String> m = new HashMap<String, String>();
-					m.put("name", "empty");
-					m.put("score", "empty");
-					jObj.put("record" + Integer.toString(i), m);
-				}
+				Log.i(Constants.WH_LOG_WARN, "Possibly failed to retrive data. Creating new record.");	
 			}
 		} catch(JSONException j) {
 			Log.e(Constants.WH_LOG_ERRO, "Failed to create JSON object. Fatal error.");
@@ -57,7 +71,6 @@ public class HighScore {
 			Log.i(Constants.WH_LOG_INFO, "Invalid name or score.");
 			return -1;
 		}
-		
 		// Where can I put the score?
 		String record = null;
 		try {
