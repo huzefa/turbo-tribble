@@ -16,7 +16,7 @@ import android.view.WindowManager;
 public class ActivityHelper {
 	
 	public static String WH_APP_NAME;
-	public static ContextWrapper context;
+	public static ContextWrapper appContext;
 	
 	/**
 	 * This function must only be called on app init.
@@ -24,7 +24,7 @@ public class ActivityHelper {
 	 */
 	public static void app_init(Activity activity) {
 		WH_APP_NAME = activity.getApplicationContext().getPackageName();
-		context = new ContextWrapper(activity.getApplicationContext());
+		appContext = new ContextWrapper(activity.getApplicationContext());
 	}
 	
 	/**

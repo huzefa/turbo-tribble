@@ -20,7 +20,7 @@ public class SimpleDataStore {
 	 */
 	public SimpleDataStore(String name) {
 		app_name = name;
-		pref = ActivityHelper.context.getSharedPreferences(app_name, Context.MODE_PRIVATE);
+		pref = ActivityHelper.appContext.getSharedPreferences(app_name, Context.MODE_PRIVATE);
 		editor = pref.edit();
 	}
 	
