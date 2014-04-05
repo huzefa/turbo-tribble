@@ -4,7 +4,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -25,6 +27,7 @@ public class GamePlay extends Activity {
 	private long time_remaining = 0;
 	private int button_in_focus = 0;
 	private Animation vanish;
+	private Vibrator vibrator;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,9 @@ public class GamePlay extends Activity {
 		final Button button[] = get_button_handles();
 		final TextView time_view = (TextView) findViewById(R.id.time_remaining);
 		final TextView score_view = (TextView) findViewById(R.id.score_textview);
+		
 		vanish = AnimationUtils.loadAnimation(this, R.anim.vanish);
+		vibrator = (Vibrator) ActivityHelper.appContext.getSystemService(Context.VIBRATOR_SERVICE);
 		
 		// disable and hide all buttons
 		for(int i = 10; i < WH_BUTTON_MAP; i+=10) {
@@ -64,7 +69,7 @@ public class GamePlay extends Activity {
 							h.hs_close();
 						}
 					}.start();
-
+					vibrator.vibrate(200);
 				}
 				if(button_pressed) {					
 					// Restart the timeout timer
