@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -142,26 +143,12 @@ public class GamePlay extends Activity {
 	 * @param v View name
 	 */
 	public void game_button_clicked(View v) {
-		score++;
 		final Button b = (Button) findViewById(v.getId());
-		
 		b.setPressed(true);
-		
 		button_pressed = true;
-		hide_button(b);	
-		
-//		vanish.setAnimationListener(new Animation.AnimationListener() {			
-//			@Override
-//			public void onAnimationStart(Animation animation) {}			
-//			@Override
-//			public void onAnimationRepeat(Animation animation) {}			
-//			@Override
-//			public void onAnimationEnd(Animation animation) {	
-//				button_pressed = true;
-//				hide_button(b);				
-//			}
-//		});
-//		b.startAnimation(vanish);
+		hide_button(b);
+		vibrator.vibrate(20);
+		score++;
 	}
 	
 	/**
