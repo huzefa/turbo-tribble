@@ -49,7 +49,6 @@ public class HighScoreActivity extends Activity {
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			Log.i(Constants.WH_LOG_INFO, "Computation started in background thread.");
-			
 			HighScore hScoreInst = new HighScore();		
 			hs_map = hScoreInst.hs_get_all();
 			return null;
@@ -57,7 +56,6 @@ public class HighScoreActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(Void result) {
-			Log.i(Constants.WH_LOG_INFO, "Finished computing highscores.");
 			//Initialize stuff
 			hScore_list = new ArrayList<HashMap>();
 			listView_hScore = (ListView) findViewById(R.id.listView_high_score);
@@ -93,6 +91,7 @@ public class HighScoreActivity extends Activity {
 			
 			HighScoreListViewAdapter hScore_adapter = new HighScoreListViewAdapter(activity, hScore_list);
 			listView_hScore.setAdapter(hScore_adapter);
+			Log.i(Constants.WH_LOG_INFO, "Finished computing highscores.");
 		}
 	}
 }

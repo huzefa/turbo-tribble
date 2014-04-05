@@ -50,7 +50,7 @@ public class HighScore {
 				hs_close();
 			}
 			else {
-				Log.i(Constants.WH_LOG_WARN, "Possibly failed to retrive data. Creating new record.");	
+				Log.i(Constants.WH_LOG_INFO, "Possibly failed to retrive data. Creating new record.");	
 			}
 		} catch(JSONException j) {
 			Log.e(Constants.WH_LOG_ERRO, "Failed to create JSON object. Fatal error.");
@@ -187,8 +187,6 @@ public class HighScore {
 			rec = "record" + Integer.toString(i);
 			int s = hs_get_score(rec);
 			if(s < 0) {
-				Log.w(Constants.WH_LOG_WARN, "[hs_get_lowest()]:We should never have gotten here. " +
-						"It has been safely handled though.");
 				return rec;
 			}
 			if(score > s) {

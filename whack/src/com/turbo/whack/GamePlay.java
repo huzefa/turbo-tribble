@@ -85,7 +85,7 @@ public class GamePlay extends Activity {
 					}
 				}
 				
-				// update ui and related activities
+				// update ui and related views
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() { 
@@ -199,10 +199,8 @@ public class GamePlay extends Activity {
 	private Button[] get_button_handles() {
 		Button button_array[] = new Button[WH_BUTTON_MAP];
 		for(int i = 0; i < 44; i++) {
-			button_array[i] = null;
-			
-		}
-		
+			button_array[i] = null;	
+		}		
 		button_array[11] = (Button) findViewById(R.id.Button11);
 		button_array[12] = (Button) findViewById(R.id.Button12);
 		button_array[13] = (Button) findViewById(R.id.Button13);

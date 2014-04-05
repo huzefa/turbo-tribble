@@ -50,22 +50,7 @@ public class ActivityHelper {
 	 * A random number that can be used as an index for our buttons.
 	 * @return
 	 */
-	public static int get_random_number() {
-//		double num = 0;
-//		int res;
-//		
-//		Random r = new Random();
-//		num = r.nextInt(45 - 10);
-//		num = Math.round((num + 5)/ 10.0) * 10.0;
-//		num = num +	(r.nextInt(45 - 10) % 4);
-//		res = (int) num;
-//		
-//		// HF: We should be able to filter out this case without doing this.
-//		if(res % 10 == 0) {
-//			res = get_random_number();
-//		}
-//		return res;
-		
+	public static int get_random_number() {		
 		int[] randArray = { 11, 12, 13, 21, 22, 23, 31, 32, 33, 41, 42, 43};
 		Random r = new Random();
 		return randArray[r.nextInt(((randArray.length - 1) - 0) + 1)];
