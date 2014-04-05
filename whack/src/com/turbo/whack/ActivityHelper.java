@@ -10,6 +10,7 @@ import java.util.Random;
 import android.app.Activity;
 import android.content.ContextWrapper;
 import android.content.pm.ActivityInfo;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -25,6 +26,7 @@ public class ActivityHelper {
 	public static void app_init(Activity activity) {
 		WH_APP_NAME = activity.getApplicationContext().getPackageName();
 		appContext = new ContextWrapper(activity.getApplicationContext());
+		Log.i(Constants.WH_LOG_INFO, "Application init complete.");
 	}
 	
 	/**
@@ -32,8 +34,7 @@ public class ActivityHelper {
 	 */
 	public static void activity_init(Activity activity) {
 		
-		// Set orientation to portrait and lock
-		// HF: There are compatibility issues with using the better SCREEN_ORIENTATION_LOCKED
+		// Set orientation to portrait and lock by disabling the sensor
 		activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 		
@@ -41,6 +42,8 @@ public class ActivityHelper {
 		activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
+		Log.i(Constants.WH_LOG_INFO, "Activity init complete.");
 	}
 	
 	/**
@@ -48,20 +51,24 @@ public class ActivityHelper {
 	 * @return
 	 */
 	public static int get_random_number() {
-		double num = 0;
-		int res;
+//		double num = 0;
+//		int res;
+//		
+//		Random r = new Random();
+//		num = r.nextInt(45 - 10);
+//		num = Math.round((num + 5)/ 10.0) * 10.0;
+//		num = num +	(r.nextInt(45 - 10) % 4);
+//		res = (int) num;
+//		
+//		// HF: We should be able to filter out this case without doing this.
+//		if(res % 10 == 0) {
+//			res = get_random_number();
+//		}
+//		return res;
 		
+		int[] randArray = { 11, 12, 13, 21, 22, 23, 31, 32, 33, 41, 42, 43};
 		Random r = new Random();
-		num = r.nextInt(45 - 10);
-		num = Math.round((num + 5)/ 10.0) * 10.0;
-		num = num +	(r.nextInt(45 - 10) % 4);
-		res = (int) num;
-		
-		// HF: We should be able to filter out this case without doing this.
-		if(res % 10 == 0) {
-			res = get_random_number();
-		}
-		return res;
+		return randArray[r.nextInt(((randArray.length - 1) - 0) + 1)];
 	}
 	
 	/**
