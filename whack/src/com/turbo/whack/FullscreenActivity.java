@@ -3,12 +3,9 @@ package com.turbo.whack;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 // Full screen activity
 public class FullscreenActivity extends Activity {
