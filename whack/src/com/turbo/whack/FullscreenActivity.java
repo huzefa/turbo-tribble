@@ -26,7 +26,7 @@ public class FullscreenActivity extends Activity {
 		start_button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(FullscreenActivity.this, GamePlay.class);
+				Intent intent = new Intent(FullscreenActivity.this, GamePlayActivity.class);
 				FullscreenActivity.this.startActivity(intent);
 			}	
 		});	
