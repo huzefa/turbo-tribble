@@ -26,13 +26,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.turbo.whack.GamePlay"
+            android:name="com.turbo.whack.GamePlayActivity"
             android:label="@string/title_activity_game_play" >
         </activity>
         <activity
             android:name="com.turbo.whack.HighScoreActivity"
             android:label="@string/title_activity_high_score" >
         </activity>
+        <activity android:name="com.turbo.whack.SettingsActivity"></activity>
     </application>
 
 </manifest>
