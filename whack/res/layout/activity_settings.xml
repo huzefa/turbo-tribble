@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <Switch
+        android:id="@+id/game_sounds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Game sounds" />
+
+    <Switch
+        android:id="@+id/vibrations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vibrations" />
+
+    <Switch
+        android:id="@+id/reset_scores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset Highscores" />
+
+    <Switch
+        android:id="@+id/reset_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset Everything" />
+
+</LinearLayout>
