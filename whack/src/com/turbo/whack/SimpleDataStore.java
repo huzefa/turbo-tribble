@@ -90,15 +90,6 @@ public class SimpleDataStore {
 	}
 	
 	/**
-	 * Remove all entries that are stored.
-	 * @return False on failure, true otherwise.
-	 */
-	public boolean remove_all() {
-		editor.clear();
-		return editor.commit();
-	}
-	
-	/**
 	 * Remove a specific entry that is mapped to the key.
 	 * @param key type String
 	 * @return False on failure, true otherwise.

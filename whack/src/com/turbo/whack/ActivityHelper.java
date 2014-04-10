@@ -21,12 +21,28 @@ public class ActivityHelper {
 	public static ContextWrapper appContext;
 	
 	/**
-	 * This function must only be called on app init.
+	 * This function must only be called on app init. It sets up certain constants and
+	 * loads settings from memory.
 	 * @param activity
 	 */
 	public static void app_init(Activity activity) {
+		SimpleDataStore data;
+		int temp;
+		
 		WH_APP_NAME = activity.getApplicationContext().getPackageName();
 		appContext = new ContextWrapper(activity.getApplicationContext());
+		
+		Log.i(Constants.WH_LOG_INFO, "Loading settings.");
+		data = new SimpleDataStore(WH_APP_NAME);
+		
+		// Load sounds setting
+		temp = data.retrieve_int_value(Constants.WH_SET_DATA_NAME + "_sounds");
+		Constants.WH_SET_SOUNDS = temp >= 0 ? temp : Constants.WH_SET_SOUNDS;
+		
+		// Load vibrate setting
+		temp = data.retrieve_int_value(Constants.WH_SET_DATA_NAME + "_vibrate");
+		Constants.WH_SET_VIBRATE = temp >= 0 ? temp : Constants.WH_SET_VIBRATE;
+		
 		Log.i(Constants.WH_LOG_INFO, "Application init complete.");
 	}
 	

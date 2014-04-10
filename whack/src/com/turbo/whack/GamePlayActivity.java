@@ -69,7 +69,10 @@ public class GamePlayActivity extends Activity {
 							h.hs_close();
 						}
 					}.start();
-					vibrator.vibrate(200);
+					
+					if(Constants.WH_SET_VIBRATE == 1) {
+						vibrator.vibrate(Constants.WH_VIBRATE_LONG);
+					}
 				}
 				if(button_pressed) {					
 					// Restart the timeout timer
@@ -146,7 +149,9 @@ public class GamePlayActivity extends Activity {
 		b.setPressed(true);
 		button_pressed = true;
 		hide_button(b);
-		vibrator.vibrate(20);
+		if(Constants.WH_SET_VIBRATE == 1) {
+			vibrator.vibrate(Constants.WH_VIBRATE_SHORT);
+		}
 		score++;
 	}
 	
