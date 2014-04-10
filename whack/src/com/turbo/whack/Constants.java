@@ -6,7 +6,8 @@ public class Constants {
 	public static final String WH_LOG_ERRO = "WH_ERRO";
 	public static final String WH_LOG_DEBUG = "WH_DEBUG";
 	
-	public static final String WH_DATA_NAME = "wh_data";
+	public static final String WH_HS_DATA_NAME = "wh_hs_data";
+	public static final String WH_SET_DATA_NAME = "wh_set_data";
 	public static long WH_TIMER_CHECK_RATE = 50;
 	public static long WH_TIMER_MULTIPLIER = 100;
 	public static double WH_LEVEL_DECAY_FACTOR = -0.1;

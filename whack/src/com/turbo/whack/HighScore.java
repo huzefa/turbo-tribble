@@ -21,11 +21,11 @@ public class HighScore {
 	 */
 	public HighScore() { 
 		sd = new SimpleDataStore(ActivityHelper.WH_APP_NAME);
-		String data = sd.retrieve_string_value(Constants.WH_DATA_NAME);
+		String data = sd.retrieve_string_value(Constants.WH_HS_DATA_NAME);
 		try {
 			// Create a new copy and initialize
 			jObj = new JSONObject();
-			sd.store_string_value(Constants.WH_DATA_NAME, "empty");
+			sd.store_string_value(Constants.WH_HS_DATA_NAME, "empty");
 			for(int i = 1; i <= Constants.WH_MAX_HIGHSCORES; i++) {
 				Map<String, String> m = new HashMap<String, String>();
 				m.put("name", "empty");
@@ -140,7 +140,7 @@ public class HighScore {
 			Log.e(Constants.WH_LOG_ERRO, "JSON to string conversion failed.");
 			return false;
 		}
-		return sd.store_string_value(Constants.WH_DATA_NAME, s);
+		return sd.store_string_value(Constants.WH_HS_DATA_NAME, s);
 	}
 	
 	/**

@@ -6,7 +6,7 @@
 
     <Switch
         android:id="@+id/game_sounds"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Game sounds" />
 
@@ -16,14 +16,14 @@
         android:layout_height="wrap_content"
         android:text="Vibrations" />
 
-    <Switch
-        android:id="@+id/reset_scores"
+    <Button
+        android:id="@+id/reset_high_scores"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reset Highscores" />
+        android:text="Reset All Highscores" />
 
-    <Switch
-        android:id="@+id/reset_all"
+    <Button
+        android:id="@+id/reset_everything"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Reset Everything" />

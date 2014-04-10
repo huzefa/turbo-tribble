@@ -19,20 +19,34 @@ public class FullscreenActivity extends Activity {
 		
 		Button start_button = (Button) findViewById(R.id.start_button);
 		Button high_score = (Button) findViewById(R.id.high_score_button);
+		Button settings = (Button) findViewById(R.id.settings_button);
 		
-		start_button.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(FullscreenActivity.this, GamePlayActivity.class);
-				FullscreenActivity.this.startActivity(intent);
-			}	
-		});	
-		high_score.setOnClickListener(new View.OnClickListener() {			
+		OnClickListener clickListener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(FullscreenActivity.this, HighScoreActivity.class);
-				FullscreenActivity.this.startActivity(intent);				
+				int id = v.getId();
+				Intent intent;
+				switch(id) {
+				case R.id.start_button:
+					intent = new Intent(FullscreenActivity.this, GamePlayActivity.class);
+					FullscreenActivity.this.startActivity(intent);
+					break;
+				case R.id.high_score_button:
+					intent = new Intent(FullscreenActivity.this, HighScoreActivity.class);
+					FullscreenActivity.this.startActivity(intent);
+					break;
+				case R.id.settings_button:
+					intent = new Intent(FullscreenActivity.this, SettingsActivity.class);
+					FullscreenActivity.this.startActivity(intent);
+					break;
+				default:
+					break;
+				}
 			}
-		});
+		};
+		
+		start_button.setOnClickListener(clickListener);
+		high_score.setOnClickListener(clickListener);
+		settings.setOnClickListener(clickListener);
 	}
 }

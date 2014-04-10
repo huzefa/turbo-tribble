@@ -13,6 +13,7 @@ import android.content.pm.ActivityInfo;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class ActivityHelper {
 	
@@ -65,5 +66,16 @@ public class ActivityHelper {
 		double result = 0;
 		result = Math.ceil(current_level * Math.exp(Constants.WH_LEVEL_DECAY_FACTOR));
 		return (int) result;
+	}
+	
+	/**
+	 * Shows a toast on the screen for LENGTH_SHORT duration. Always returns zero
+	 * @param string The string that contains the text to show.
+	 * @return Always zero
+	 */
+	public static int show_toast(String string) {
+		Toast toast = Toast.makeText(appContext, string, Toast.LENGTH_SHORT);
+		toast.show();
+		return 0;
 	}
 }

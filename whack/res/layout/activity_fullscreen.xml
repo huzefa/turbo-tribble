@@ -13,21 +13,21 @@
         android:text="Start Game" />
 
     <Button
-        android:id="@+id/test_button"
+        android:id="@+id/high_score_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/start_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:background="@drawable/mosquito_button" />
-
-    <Button
-        android:id="@+id/high_score_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/test_button"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="23dp"
         android:text="High Score" />
+
+    <Button
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/high_score_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="Settings" />
 
 </RelativeLayout>
