@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -61,14 +62,12 @@ public class GamePlayActivity extends Activity {
 					Log.i(Constants.WH_LOG_INFO, "Level: " + level);
 					Log.i(Constants.WH_LOG_INFO, "Time given: " + (level * Constants.WH_TIMER_MULTIPLIER));
 					
-					// Add score to screen
-					new Thread() {
-						public void run() {
-							HighScore h = new HighScore();
-							h.hs_add("NONAME", score);
-							h.hs_close();
-						}
-					}.start();
+					//Start high score activity
+					Intent i = new Intent(GamePlayActivity.this, HighScoreActivity.class);
+					i.putExtra("FROM_GAME_PLAY_ACTIVITY", true);
+					i.putExtra("score", score);
+					startActivity(i);
+					GamePlayActivity.this.finish();
 					
 					if(Constants.WH_SET_VIBRATE == 1) {
 						vibrator.vibrate(Constants.WH_VIBRATE_LONG);

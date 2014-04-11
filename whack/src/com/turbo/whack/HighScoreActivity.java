@@ -4,10 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.widget.EditText;
 import android.widget.ListView;
 
 public class HighScoreActivity extends Activity {
@@ -19,6 +28,8 @@ public class HighScoreActivity extends Activity {
 	private ArrayList<String> scores;
 	private ArrayList<String> names;
 	
+	private String highScoreName;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		ActivityHelper.activity_init(this);
@@ -26,9 +37,74 @@ public class HighScoreActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_high_score);
 		
-		// Display high scores
-		HighScoreComputationTask t = new HighScoreComputationTask(this);
-		t.execute();
+		final Intent i = getIntent();
+		Log.d("MSG", ""+i.getBooleanExtra("FROM_GAME_PLAY_ACTIVITY", false));
+		
+		if(i.getBooleanExtra("FROM_GAME_PLAY_ACTIVITY", false)){
+			EditText inputEditText = ((EditText) findViewById(R.id.edit_text_highscore_name_input));
+			Dialog enterNameDialog = onCreateDialog(this,inputEditText);
+			enterNameDialog.setOnDismissListener(new OnDismissListener() {
+				
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					final int score = i.getIntExtra("score", -1);
+					Log.d("MSG", ""+score);
+//					new Thread() {
+//						public void run() {
+//							HighScore h = new HighScore();
+//							h.hs_add(highScoreName, score);
+//							h.hs_close();
+//						}
+//					}.start();
+//					
+					HighScore h = new HighScore();
+					h.hs_add(highScoreName, score);
+					h.hs_close();
+					
+					// Display high scores
+					HighScoreComputationTask t = new HighScoreComputationTask(HighScoreActivity.this);
+					t.execute();
+				}
+			});
+			enterNameDialog.show();
+			
+		}
+		else{
+			// Display high scores
+			HighScoreComputationTask t = new HighScoreComputationTask(this);
+			t.execute();
+		}
+	}
+	
+	public Dialog onCreateDialog(Context context, final EditText inputEditText) {
+	    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+	    // Get the layout inflater
+	    LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+
+	    // Inflate and set the layout for the dialog
+	    // Pass null as the parent view because its going in the dialog layout
+	    builder.setView(inflater.inflate(R.layout.dialog_name_inputter, null))
+	    // Add action buttons
+	           .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+	               @Override
+	               public void onClick(DialogInterface dialog, int id) {
+	            	   try{
+	            		   String temp = inputEditText.getText().toString();
+	            		   highScoreName = temp;
+	            		   Log.d("MSG", "highScoreName"+ highScoreName);
+	 	            	   if(highScoreName != null)
+	 	            		   highScoreName = "NONAME";
+	 	            	   
+	            	   }catch(Exception e){
+	            		   highScoreName = "NONAME";
+	            	   }
+	            	   
+	            	   
+	            	   
+	               }
+	           })
+	           .setTitle("Enter name for high score:");      
+	    return builder.create();
 	}
 	
 	// HF: Void != void
