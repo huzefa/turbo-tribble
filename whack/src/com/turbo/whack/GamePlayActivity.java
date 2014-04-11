@@ -69,6 +69,8 @@ public class GamePlayActivity extends Activity {
 					startActivity(i);
 					GamePlayActivity.this.finish();
 					
+					
+					
 					if(Constants.WH_SET_VIBRATE == 1) {
 						vibrator.vibrate(Constants.WH_VIBRATE_LONG);
 					}
