@@ -42,7 +42,10 @@ public class HighScoreActivity extends Activity {
 		Log.d("MSG", ""+i.getBooleanExtra("FROM_GAME_PLAY_ACTIVITY", false));
 		
 		if(i.getBooleanExtra("FROM_GAME_PLAY_ACTIVITY", false)){
+<<<<<<< HEAD
 			
+=======
+>>>>>>> 5008d27ebd08b739246b8708765f0a527313b5b3
 			Dialog enterNameDialog = onCreateDialog(this);
 			enterNameDialog.setOnDismissListener(new OnDismissListener() {
 				
@@ -92,10 +95,18 @@ public class HighScoreActivity extends Activity {
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
 	            	   try{
+<<<<<<< HEAD
 	            		   EditText inputEditText = ((EditText) v.findViewById(R.id.edit_text_highscore_name_input));
 	            		   highScoreName = inputEditText.getText().toString();
 	            		   
 	 	            	   if(highScoreName == null)
+=======
+	           			   EditText inputEditText = (EditText) findViewById(R.id.edit_text_highscore_name_input);
+	            		   String temp = inputEditText.getText().toString();
+	            		   highScoreName = temp;
+	            		   Log.d("MSG", "highScoreName"+ highScoreName);
+	 	            	   if(highScoreName != null)
+>>>>>>> 5008d27ebd08b739246b8708765f0a527313b5b3
 	 	            		   highScoreName = "NONAME";
 	 	            	   
 	            	   }catch(Exception e){
