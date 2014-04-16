@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -41,8 +42,8 @@ public class HighScoreActivity extends Activity {
 		Log.d("MSG", ""+i.getBooleanExtra("FROM_GAME_PLAY_ACTIVITY", false));
 		
 		if(i.getBooleanExtra("FROM_GAME_PLAY_ACTIVITY", false)){
-			EditText inputEditText = ((EditText) findViewById(R.id.edit_text_highscore_name_input));
-			Dialog enterNameDialog = onCreateDialog(this,inputEditText);
+			
+			Dialog enterNameDialog = onCreateDialog(this);
 			enterNameDialog.setOnDismissListener(new OnDismissListener() {
 				
 				@Override
@@ -76,27 +77,30 @@ public class HighScoreActivity extends Activity {
 		}
 	}
 	
-	public Dialog onCreateDialog(Context context, final EditText inputEditText) {
+	public Dialog onCreateDialog(Context context) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(context);
 	    // Get the layout inflater
 	    LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+	    final View v = inflater.inflate(R.layout.dialog_name_inputter, null);
+	    
 
 	    // Inflate and set the layout for the dialog
 	    // Pass null as the parent view because its going in the dialog layout
-	    builder.setView(inflater.inflate(R.layout.dialog_name_inputter, null))
+	    builder.setView(v)
 	    // Add action buttons
 	           .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
 	            	   try{
-	            		   String temp = inputEditText.getText().toString();
-	            		   highScoreName = temp;
-	            		   Log.d("MSG", "highScoreName"+ highScoreName);
-	 	            	   if(highScoreName != null)
+	            		   EditText inputEditText = ((EditText) v.findViewById(R.id.edit_text_highscore_name_input));
+	            		   highScoreName = inputEditText.getText().toString();
+	            		   
+	 	            	   if(highScoreName == null)
 	 	            		   highScoreName = "NONAME";
 	 	            	   
 	            	   }catch(Exception e){
 	            		   highScoreName = "NONAME";
+	            		   e.printStackTrace();
 	            	   }
 	            	   
 	            	   
