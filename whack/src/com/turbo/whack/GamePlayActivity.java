@@ -69,8 +69,6 @@ public class GamePlayActivity extends Activity {
 					startActivity(i);
 					GamePlayActivity.this.finish();
 					
-					
-					
 					if(Constants.WH_SET_VIBRATE == 1) {
 						vibrator.vibrate(Constants.WH_VIBRATE_LONG);
 					}
@@ -102,7 +100,7 @@ public class GamePlayActivity extends Activity {
 						if(time_remaining < 0) {
 							time_remaining = 0;
 						}
-						time_view.setText(Long.toString(time_remaining));
+						time_view.setText(Long.toString(time_remaining / 1000)); //HF: ms -> s
 						if(game_over) {
 							button[button_in_focus].setEnabled(false);
 						}
