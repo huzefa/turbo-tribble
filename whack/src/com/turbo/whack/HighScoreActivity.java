@@ -29,7 +29,7 @@ public class HighScoreActivity extends Activity {
 	private ArrayList<String> scores;
 	private ArrayList<String> names;
 	
-	private String highScoreName;
+	private String highScoreName = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +92,9 @@ public class HighScoreActivity extends Activity {
 	            	   try{
 	            		   EditText inputEditText = ((EditText) v.findViewById(R.id.edit_text_highscore_name_input));
 	            		   highScoreName = inputEditText.getText().toString();
-	 	            	   if(highScoreName != null)
+	 	            	   if(highScoreName == null) {
 	 	            		   highScoreName = "NONAME";
-	 	            	   
+	 	            	   }
 	            	   }catch(Exception e){
 	            		   highScoreName = "NONAME";
 	            		   e.printStackTrace();
