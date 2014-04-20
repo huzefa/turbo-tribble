@@ -5,11 +5,17 @@
  */
 package com.turbo.whack;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.pm.ActivityInfo;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,6 +26,9 @@ public class ActivityHelper {
 	public static String WH_APP_NAME;
 	public static ContextWrapper appContext;
 	
+	private static Vibrator vibrator;
+	private static SimpleSoundPlayer sound;
+
 	/**
 	 * This function must only be called on app init. It sets up certain constants and
 	 * loads settings from memory.
@@ -40,8 +49,13 @@ public class ActivityHelper {
 		Constants.WH_SET_SOUNDS = temp >= 0 ? temp : Constants.WH_SET_SOUNDS;
 		
 		// Load vibrate setting
+		vibrator = (Vibrator) appContext.getSystemService(Context.VIBRATOR_SERVICE);
 		temp = data.retrieve_int_value(Constants.WH_SET_DATA_NAME + "_vibrate");
 		Constants.WH_SET_VIBRATE = temp >= 0 ? temp : Constants.WH_SET_VIBRATE;
+		
+		// Load sounds
+		sound = new SimpleSoundPlayer(Constants.WH_MAX_SOUND_STREAMS);
+		sound.load(R.raw.splat);
 		
 		Log.i(Constants.WH_LOG_INFO, "Application init complete.");
 	}
@@ -92,6 +106,20 @@ public class ActivityHelper {
 	public static int show_toast(String string) {
 		Toast toast = Toast.makeText(appContext, string, Toast.LENGTH_SHORT);
 		toast.show();
+		return 0;
+	}
+	
+	public static int vibrate(long duration) {
+		if(Constants.WH_SET_VIBRATE == 1) {
+			vibrator.vibrate(duration);
+		}
+		return 0;
+	}
+	
+	public static int play(int res_id) {
+		if(Constants.WH_SET_SOUNDS == 1) {
+			sound.play(res_id);
+		}
 		return 0;
 	}
 }

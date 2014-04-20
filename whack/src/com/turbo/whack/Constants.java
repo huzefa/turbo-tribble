@@ -18,6 +18,7 @@ public class Constants {
 	public static int WH_MAX_HIGHSCORES = 10;
 	public static long WH_VIBRATE_SHORT = 20;
 	public static long WH_VIBRATE_LONG = 200;
+	public static int WH_MAX_SOUND_STREAMS = 4;
 	
 	// App settings. They must be restored during runtime.
 	public static int WH_SET_SOUNDS = 1;

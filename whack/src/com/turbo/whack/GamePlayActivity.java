@@ -41,7 +41,6 @@ public class GamePlayActivity extends Activity {
 		final TextView score_view = (TextView) findViewById(R.id.score_textview);
 		
 		vanish = AnimationUtils.loadAnimation(this, R.anim.vanish);
-		vibrator = (Vibrator) ActivityHelper.appContext.getSystemService(Context.VIBRATOR_SERVICE);
 		
 		// disable and hide all buttons
 		for(int i = 10; i < WH_BUTTON_MAP; i+=10) {
@@ -62,16 +61,14 @@ public class GamePlayActivity extends Activity {
 					Log.i(Constants.WH_LOG_INFO, "Level: " + level);
 					Log.i(Constants.WH_LOG_INFO, "Time given: " + (level * Constants.WH_TIMER_MULTIPLIER));
 					
+					ActivityHelper.vibrate(Constants.WH_VIBRATE_LONG);
+					
 					//Start high score activity
 					Intent i = new Intent(GamePlayActivity.this, HighScoreActivity.class);
 					i.putExtra("FROM_GAME_PLAY_ACTIVITY", true);
 					i.putExtra("score", score);
 					startActivity(i);
 					GamePlayActivity.this.finish();
-					
-					if(Constants.WH_SET_VIBRATE == 1) {
-						vibrator.vibrate(Constants.WH_VIBRATE_LONG);
-					}
 				}
 				if(button_pressed) {					
 					// Restart the timeout timer
@@ -148,9 +145,8 @@ public class GamePlayActivity extends Activity {
 		b.setPressed(true);
 		button_pressed = true;
 		hide_button(b);
-		if(Constants.WH_SET_VIBRATE == 1) {
-			vibrator.vibrate(Constants.WH_VIBRATE_SHORT);
-		}
+		ActivityHelper.vibrate(Constants.WH_VIBRATE_SHORT);
+		ActivityHelper.play(R.raw.splat);
 		score++;
 	}
 	
