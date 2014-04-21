@@ -109,6 +109,11 @@ public class ActivityHelper {
 		return 0;
 	}
 	
+	/**
+	 * Vibrates the phone for given duration if permitted.
+	 * @param duration The duration in ms.
+	 * @return Zero on success.
+	 */
 	public static int vibrate(long duration) {
 		if(Constants.WH_SET_VIBRATE == 1) {
 			vibrator.vibrate(duration);
@@ -116,6 +121,11 @@ public class ActivityHelper {
 		return 0;
 	}
 	
+	/**
+	 * Vibrates the phone for given duration if permitted.
+	 * @param res_id The resource id of the tune.
+	 * @return Zero on success.
+	 */
 	public static int play(int res_id) {
 		if(Constants.WH_SET_SOUNDS == 1) {
 			sound.play(res_id);

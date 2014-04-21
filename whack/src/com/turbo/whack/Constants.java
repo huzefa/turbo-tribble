@@ -20,7 +20,7 @@ public class Constants {
 	public static long WH_VIBRATE_LONG = 200;
 	public static int WH_MAX_SOUND_STREAMS = 4;
 	
-	// App settings. They must be restored during runtime.
+	// Default app settings. They must be restored during runtime.
 	public static int WH_SET_SOUNDS = 1;
 	public static int WH_SET_VIBRATE = 1;
 }
