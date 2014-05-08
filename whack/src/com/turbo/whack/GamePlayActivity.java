@@ -8,14 +8,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class GamePlayActivity extends Activity {
+public class GamePlayActivity extends Activity implements AnimationListener{
 	private static final int WH_BUTTON_MAP = 44;
 	
 	private Timer check_timer = new Timer();
@@ -27,7 +30,7 @@ public class GamePlayActivity extends Activity {
 	private int score = 0;
 	private long time_remaining = 0;
 	private int button_in_focus = 0;
-	private Animation vanish;
+	private Animation zoom_in;
 	private Vibrator vibrator;
 	
 	@Override
@@ -40,7 +43,15 @@ public class GamePlayActivity extends Activity {
 		final TextView time_view = (TextView) findViewById(R.id.time_remaining);
 		final TextView score_view = (TextView) findViewById(R.id.score_textview);
 		
-		vanish = AnimationUtils.loadAnimation(this, R.anim.vanish);
+		//define flashing
+		zoom_in = AnimationUtils.loadAnimation(this, R.anim.zoom_in);
+		zoom_in.setAnimationListener((AnimationListener) this);
+		
+		
+		//set flash animation to the textviews' onTextChanged
+//		setFlashAnimationToTextView(score_view);
+		
+		
 		
 		// disable and hide all buttons
 		for(int i = 10; i < WH_BUTTON_MAP; i+=10) {
@@ -102,6 +113,7 @@ public class GamePlayActivity extends Activity {
 							button[button_in_focus].setEnabled(false);
 						}
 						if(button_pressed) {
+							score_view.startAnimation(zoom_in);
 							show_random_button(button);
 							button_pressed = false;
 						}
@@ -125,6 +137,22 @@ public class GamePlayActivity extends Activity {
 		show_random_button(button);
 	}
 	
+
+	private void setFlashAnimationToTextView(final TextView textView) {
+		
+		textView.addTextChangedListener(new TextWatcher() {					
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				textView.startAnimation(zoom_in);
+			}			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}			
+			@Override
+			public void afterTextChanged(Editable s) {}
+		});
+	}
+
+
 	/**
 	 * This method will display any random button
 	 * @param button An array of type button
@@ -207,4 +235,12 @@ public class GamePlayActivity extends Activity {
 		
 		return button_array;
 	}
+
+
+	@Override
+	public void onAnimationStart(Animation animation) {}
+	@Override
+	public void onAnimationEnd(Animation animation) {}
+	@Override
+	public void onAnimationRepeat(Animation animation) {	}
 }

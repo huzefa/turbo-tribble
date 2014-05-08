@@ -34,5 +34,35 @@
     </style>
 
     <style name="ButtonBarButton" />
+    <style name="GamePlayDisplayTextStyle" parent="@android:style/TextAppearance.Medium"> 
+	   <item name="android:textSize">80sp</item>
+	   <item name="android:fontFamily">sans-serif-light</item>
+	   <item name="android:gravity">center</item>
+	   <item name="android:textStyle">bold</item>
+	   <item name="android:textColor">@android:color/primary_text_dark</item>
+	</style>
+	<style name="SettingsTextStyle" parent="@android:style/TextAppearance.Medium"> 
+       <item name="android:textSize">30sp</item>
+       <item name="android:fontFamily">sans-serif</item>
+       <item name="android:gravity">left</item>
+       <item name="android:textStyle">normal</item>
+       <item name="android:textColor">@android:color/primary_text_light</item>
+    </style>
+    <style name="HighScoreListViewTextStyle" parent="@android:style/TextAppearance.Medium"> 
+       <item name="android:textSize">30sp</item>
+       <item name="android:fontFamily">sans-serif</item>
+       <item name="android:gravity">left</item>
+       <item name="android:textStyle">normal</item>
+       <item name="android:textColor">@android:color/primary_text_light</item>
+    </style>
+    
+    <style name="HighScoreListViewStyle" parent="@android:style/TextAppearance.Medium"> 
+       <item name="android:textSize">30sp</item>
+       <item name="android:fontFamily">sans-serif</item>
+       <item name="android:gravity">left</item>
+       <item name="android:textStyle">normal</item>
+       <item name="android:textColor">@android:color/primary_text_light</item>
+    </style>
+    
 
 </resources>
